@@ -1,0 +1,4 @@
+services:
+#    pfa_ensaobox.example:
+#        class: PFA\EnsaoboxBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

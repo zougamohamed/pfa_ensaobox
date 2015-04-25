@@ -1,0 +1,7 @@
+pfa_ensaobox:
+    resource: "@PFAEnsaoboxBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
