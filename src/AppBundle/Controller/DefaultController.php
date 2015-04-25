@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+//ce commentaire pour vérifier l'intéraction
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
