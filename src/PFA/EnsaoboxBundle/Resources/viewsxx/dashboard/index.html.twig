@@ -1,0 +1,22 @@
+{# src/ENSAO/EnsaoboxBundle/Resources/views/Advert/index.html.twig #}
+
+{% extends "PFAEnsaoboxBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+		{% block pfa_ensaoboxHeader %}
+           	{{ parent() }}
+        {% endblock %}
+        {% block pfa_ensaoboxMenu %}
+           	{{ parent() }}
+        {% endblock %}
+  		{% block pfa_ensaoboxContainer %}
+            {{ include('PFAEnsaoboxBundle::main_container.html.twig') }}
+        {% endblock %}
+        {% block pfa_ensaoboxFooter %}
+            
+        {% endblock %}
+        
+
+{% endblock %}
