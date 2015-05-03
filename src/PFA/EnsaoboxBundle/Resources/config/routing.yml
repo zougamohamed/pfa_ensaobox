@@ -1,3 +1,11 @@
 pfa_ensaobox_homepage:
     path:     /
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:index }
+
+pfa_ensaobox_document_add:
+    path:     /document/add/
+    defaults: { _controller: PFAEnsaoboxBundle:Dashboard:addDocument }
+
+pfa_ensaobox_admin:
+    path:     /admin/
+    defaults: { _controller: PFAEnsaoboxBundle:Dashboard:admin }
