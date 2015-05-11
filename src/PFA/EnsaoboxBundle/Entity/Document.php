@@ -3,6 +3,7 @@
 namespace PFA\EnsaoboxBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Document
@@ -10,145 +11,182 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="PFA\EnsaoboxBundle\Entity\DocumentRepository")
  */
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ */
 class Document
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    public $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
+     * * @Assert\NotBlank
      */
-    private $name;
+    public $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="professor", type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $professor;
+    public $path;
+    /**
+     * @Assert\File(
+     *     maxSize = "12M",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
+     */
+    public $file;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="classe", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="PFA\EnsaoboxBundle\Entity\Filieres")
      */
-    private $classe;
+    private $filieres;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="matiere", type="string", length=255)
+     * @return mixed
      */
-    private $matiere;
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
+    public function getFilieres()
     {
-        return $this->id;
+        return $this->filieres;
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Document
+     * @param mixed $filieres
      */
-    public function setName($name)
+    public function setFilieres($filieres)
     {
-        $this->name = $name;
-    
-        return $this;
+        $this->filieres = $filieres;
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @ORM\ManyToOne(targetEntity="PFA\EnsaoboxBundle\Entity\Classes")
      */
-    public function getName()
+    private $classes;
+
+    /**
+     * @return mixed
+     */
+    public function getClasses()
     {
-        return $this->name;
+        return $this->classes;
+    }
+
+
+    /**
+     * @param mixed $classes
+     */
+    public function setClasses($classes)
+    {
+        $this->classes = $classes;
     }
 
     /**
-     * Set professor
-     *
-     * @param string $professor
-     * @return Document
+     * @ORM\ManyToOne(targetEntity="PFA\EnsaoboxBundle\Entity\Matieres")
      */
-    public function setProfessor($professor)
-    {
-        $this->professor = $professor;
-    
-        return $this;
-    }
+    private $matieres;
 
     /**
-     * Get professor
-     *
-     * @return string 
+     * @return mixed
      */
-    public function getProfessor()
+    public function getMatieres()
     {
-        return $this->professor;
+        return $this->matieres;
+    }
+    /**
+     * @param mixed $matieres
+     */
+    public function setMatieres($matieres)
+    {
+        $this->matieres = $matieres;
     }
 
-    /**
-     * Set classe
-     *
-     * @param string $classe
-     * @return Document
-     */
-    public function setClasse($classe)
+    public function getAbsolutePath()
     {
-        $this->classe = $classe;
-    
-        return $this;
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
 
-    /**
-     * Get classe
-     *
-     * @return string 
-     */
-    public function getClasse()
+    public function getWebPath()
     {
-        return $this->classe;
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
     }
 
-    /**
-     * Set matiere
-     *
-     * @param string $matiere
-     * @return Document
-     */
-    public function setMatiere($matiere)
+    protected function getUploadRootDir()
     {
-        $this->matiere = $matiere;
-    
-        return $this;
+        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
-    /**
-     * Get matiere
-     *
-     * @return string 
-     */
-    public function getMatiere()
+    protected function getUploadDir()
     {
-        return $this->matiere;
+        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
+        // le document/image dans la vue.
+        return 'uploads/documents';
     }
+//    /**
+//     * @ORM\PrePersist()
+//     * @ORM\PreUpdate()
+//     */
+//    public function preUpload()
+//    {
+//        if (null !== $this->file) {
+//            // faites ce que vous voulez pour générer un nom unique
+//            $this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
+//        }
+//    }
+//    /**
+//     * @ORM\PostPersist()
+//     * @ORM\PostUpdate()
+//     */
+//    public function upload()
+//    {
+//        if (null === $this->file) {
+//            return;
+//        }
+//
+//        // s'il y a une erreur lors du déplacement du fichier, une exception
+//        // va automatiquement être lancée par la méthode move(). Cela va empêcher
+//        // proprement l'entité d'être persistée dans la base de données si
+//        // erreur il y a
+//        $this->file->move($this->getUploadRootDir(), $this->path);
+//
+//        unset($this->file);
+//    }
+//    /**
+//     * @ORM\PostRemove()
+//     */
+//    public function removeUpload()
+//    {
+//        if ($file = $this->getAbsolutePath()) {
+//            unlink($file);
+//        }
+//    }
+    public function upload()
+    {
+        // la propriété « file » peut être vide si le champ n'est pas requis
+        if (null === $this->file) {
+            return;
+        }
+
+        // utilisez le nom de fichier original ici mais
+        // vous devriez « l'assainir » pour au moins éviter
+        // quelconques problèmes de sécurité
+
+        // la méthode « move » prend comme arguments le répertoire cible et
+        // le nom de fichier cible où le fichier doit être déplacé
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+
+        // définit la propriété « path » comme étant le nom de fichier où vous
+        // avez stocké le fichier
+        $this->path = $this->file->getClientOriginalName();
+
+        // « nettoie » la propriété « file » comme vous n'en aurez plus besoin
+        $this->file = null;
+    }
+
 }

@@ -1,0 +1,95 @@
+{# src/ENSAO/EnsaoboxBundle/Resources/views/addFiles/index.html.twig #}
+
+{% extends "PFAEnsaoboxBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+
+		{% block pfa_ensaoboxHeader %}
+           	{{ parent() }}
+    {% endblock %}
+    {% block pfa_ensaoboxMenu %}
+           {{ parent() }}
+    {% endblock %}
+  	{% block pfa_ensaoboxContainer %}
+        <!--main content start-->
+        <section id="main-content">
+          <section class="wrapper">
+              <p>je suis dans la page de l'ajout des fichiers</p>
+              <h1 class="text-center">Upload File</h1>
+              <div>
+              <div class="col-md-6">
+                <table class="table table-inbox table-bordered">
+                {{ form_start(form) }}
+                    <tr>
+                        <td>{{ form_label(form.filieres) }}</td>
+                        <td>{{ form_widget(form.filieres) }}</td>
+                        <td>{{ form_errors(form.filieres) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(form.classes) }}</td>
+                        <td>{{ form_widget(form.classes) }}</td>
+                        <td>{{ form_errors(form.classes) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(form.matieres) }}</td>
+                        <td>{{ form_widget(form.matieres) }}</td>
+                        <td>{{ form_errors(form.matieres) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(form.name) }}</td>
+                        <td>{{ form_widget(form.name) }}</td>
+                        <td>{{ form_errors(form.name) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(form.file) }}</td>
+                        <td style="font-size: 25px;" class="fileupload">{{ form_widget(form.file) }}</td>
+                        <td>{{ form_errors(form.file) }}</td>
+                    </tr>
+                    {#<tr>#}
+                        {#<td>{{ form_label(form.envoyer) }}</td>#}
+                        <td></td>
+                        <td >{{ form_widget(form.envoyer) }}</td>
+                        <td></td>
+                        {#<td>{{ form_errors(form.envoyer) }}</td>#}
+                    {#</tr>#}
+                </table>
+
+              {{ form_end(form) }}
+
+              {{ error }}
+              </div>
+              <div class="col-md-6">
+              <table class="table table-inbox table-bordered" >
+                  <thead>
+                    <th>filiere</th>
+                    <th>Classe</th>
+                    <th>Matiere</th>
+                    <th>Cours</th>
+                    {#<th>path</th>#}
+                  </thead>
+                  {% for d in doc  %}
+                      <tr {% if d.matieres.nomMatiere=="JAVA" %} class="info" {% elseif d.matieres.nomMatiere=="C++" %} class="success" {% elseif d.matieres.nomMatiere=="RESEAU" %} class="warning" {% elseif d.matieres.nomMatiere=="ASP.NET" %} class="danger" {% elseif d.matieres.nomMatiere=="ADMIN LINUX" %} class="active" {% endif %}>
+                          <td>{{ d.filieres.nomFiliere }}</td>
+                          <td>{{ d.classes.nomClasse }}</td>
+                          <td>{{ d.matieres.nomMatiere }}</td>
+                          <td><a href="{{ asset('uploads/documents/'~d.path) }}">{{ d.path }}</a></td>
+                          {#<td>{{ d.path }}</td>#}
+                      </tr>
+
+                  {% endfor %}
+              </table>
+                  {#<form action="#" method="post" {{ form_enctype(form) }}>#}
+                      {#{{ form_widget(form) }}#}
+                      {#<input type="submit" value="Upload Document" />#}
+                  {#</form>#}
+
+              </div>
+              </div>
+          </section>
+        </section>
+    {% endblock %}
+    {% block pfa_ensaoboxFooter %}
+            
+    {% endblock %}
+        

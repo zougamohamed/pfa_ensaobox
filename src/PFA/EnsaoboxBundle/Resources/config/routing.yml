@@ -1,3 +1,6 @@
 pfa_ensaobox_homepage:
     path:     /
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:index }
+pfa_ensaobox_ajouter_files:
+    path:    /ajouter
+    defaults: { _controller: PFAEnsaoboxBundle:Upload:ajouter}
