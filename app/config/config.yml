@@ -24,9 +24,6 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
-twig:
-    form:
-        resources: ['bootstrap_3_layout.html.twig']
 
 # Twig Configuration
 twig:

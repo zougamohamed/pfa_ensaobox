@@ -1,4 +1,5 @@
 /app/bootstrap*
 /app/cache/*
 /app/logs/*
+/web/uploads/*
 /.idea
