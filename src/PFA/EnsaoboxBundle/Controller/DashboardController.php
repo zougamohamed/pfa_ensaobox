@@ -5,7 +5,6 @@ namespace PFA\EnsaoboxBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use PFA\EnsaoboxBundle\Entity\Document;
 use Symfony\Component\HttpFoundation\Request;
-=======
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends Controller
@@ -41,7 +40,7 @@ class DashboardController extends Controller
         return $this->render('PFAEnsaoboxBundle:addFiles:addFiles.html.twig', array(
       	'form' => $form->createView(),
       	));
-
+    }
 
     public function addDocumentAction()
     {
