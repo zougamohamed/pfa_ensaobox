@@ -1,0 +1,27 @@
+{% extends "PFAEnsaoboxBundle::layout.html.twig" %}
+{%  block title %}Mon Profil{% endblock %}
+{%  block pfa_ensaoboxHeader %}  {{  parent()}}{% endblock %}
+{%  block pfa_ensaoboxMenu %}{{  parent()}}{% endblock %}
+{%  block pfa_ensaoboxContainer %}
+    <section id="main-content">
+    <section class="wrapper">
+    <ul>
+
+    <h2><a href="edit/{{ user.id }}">Editer votre profil</a></h2>
+
+    <li>Nom : {{ user.username }}</li>
+    <li>Email : {{ user.email }}</li>
+    <li>Filière : {{ user.filiere }}</li>
+    <li>Niveau :{{ user.niveau }}</li>
+    <li><a href="{{ user.lienFacebook }}">Facebook</a></li>
+    <li>à propos : {{ user.aPropos }}</li>
+
+
+
+    </ul>
+        </section>
+        </section>
+{% endblock %}
+
+{%  block pfa_ensaoboxFooter %}{{  parent()}}{% endblock %}
+

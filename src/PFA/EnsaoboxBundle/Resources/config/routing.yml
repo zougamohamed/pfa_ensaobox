@@ -1,6 +1,43 @@
 pfa_ensaobox_homepage:
     path:     /
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:index }
+<<<<<<< HEAD
 pfa_ensaobox_ajouter_files:
     path:    /ajouter
     defaults: { _controller: PFAEnsaoboxBundle:Upload:ajouter}
+=======
+
+pfa_ensaobox_document_add:
+    path:     /document/add/
+    defaults: { _controller: PFAEnsaoboxBundle:Dashboard:addDocument }
+
+pfa_ensaobox_admin:
+    path:     /admin/
+    defaults: { _controller: PFAEnsaoboxBundle:Dashboard:admin }
+
+# cette partie est pour ajout, affichage, edition et suppresion d'un utilisateur !!
+
+pfa_ensaobox_user_view:
+    path:      /profile/{id}
+    defaults:  { _controller: PFAEnsaoboxBundle:User:view }
+    requirements:
+        id: \d+
+
+pfa_ensaobox_user_add:
+    path:      /profile/add
+    defaults:  { _controller: PFAEnsaoboxBundle:User:add }
+
+pfa_ensaobox_user_edit:
+    path:      profile/edit/{id}
+    defaults:  { _controller: PFAEnsaoboxBundle:User:edit }
+    requirements:
+        id: \d+
+
+pfa_ensaobox_user_delete:
+    path:      profile/delete/{id}
+    defaults:  { _controller: PFAEnsaoboxBundle:User:delete }
+    requirements:
+        id: \d+
+
+# ici finis la partie concernant l'utilisateur !!
+>>>>>>> ff3c771d04d6a8c37def62d7b9c685e633375988
