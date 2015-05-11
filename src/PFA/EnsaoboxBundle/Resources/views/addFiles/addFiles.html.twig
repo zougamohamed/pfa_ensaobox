@@ -15,49 +15,51 @@
         <!--main content start-->
         <section id="main-content">
           <section class="wrapper">
-              <p>je suis dans la page de l'ajout des fichiers</p>
               <h1 class="text-center">Upload File</h1>
               <div>
               <div class="col-md-6">
+                  <div class="text-center"><h2 class="alert-danger">{{ error }}</h2></div>
                 <table class="table table-inbox table-bordered">
-                {{ form_start(form) }}
+                {{ form_start(formDoc) }}
                     <tr>
-                        <td>{{ form_label(form.filieres) }}</td>
-                        <td>{{ form_widget(form.filieres) }}</td>
-                        <td>{{ form_errors(form.filieres) }}</td>
+                        <td>{{ form_label(formDoc.filieres) }}</td>
+                        <td>{{ form_widget(formDoc.filieres) }}</td>
+                        <td>{{ form_errors(formDoc.filieres) }}</td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(form.classes) }}</td>
-                        <td>{{ form_widget(form.classes) }}</td>
-                        <td>{{ form_errors(form.classes) }}</td>
+                        <td>{{ form_label(formDoc.classes) }}</td>
+                        <td>{{ form_widget(formDoc.classes) }}</td>
+                        <td>{{ form_errors(formDoc.classes) }}</td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(form.matieres) }}</td>
-                        <td>{{ form_widget(form.matieres) }}</td>
-                        <td>{{ form_errors(form.matieres) }}</td>
+                        <td>{{ form_label(formDoc.matieres) }}</td>
+                        <td>{{ form_widget(formDoc.matieres) }}</td>
+                        <td>{{ form_errors(formDoc.matieres) }}</td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(form.name) }}</td>
-                        <td>{{ form_widget(form.name) }}</td>
-                        <td>{{ form_errors(form.name) }}</td>
+                        {{ form_start(formFiliere) }}
+                        <td>{{ form_label(formFiliere.nomFiliere) }}</td>
+                        <td>{{ form_widget(formFiliere.nomFiliere) }}</td>
+                        <td>{{ form_errors(formFiliere.nomFiliere) }}</td>
+                        {{ form_end(formFiliere) }}
                     </tr>
                     <tr>
-                        <td>{{ form_label(form.file) }}</td>
-                        <td style="font-size: 25px;" class="fileupload">{{ form_widget(form.file) }}</td>
-                        <td>{{ form_errors(form.file) }}</td>
+                        <td>{{ form_label(formDoc.file) }}</td>
+                        <td style="font-size: 25px;" class="fileupload">{{ form_widget(formDoc.file) }}</td>
+                        <td>{{ form_errors(formDoc.file) }}</td>
                     </tr>
                     {#<tr>#}
                         {#<td>{{ form_label(form.envoyer) }}</td>#}
                         <td></td>
-                        <td >{{ form_widget(form.envoyer) }}</td>
+                        <td >{{ form_widget(formDoc.envoyer) }}</td>
                         <td></td>
                         {#<td>{{ form_errors(form.envoyer) }}</td>#}
                     {#</tr>#}
                 </table>
 
-              {{ form_end(form) }}
+              {{ form_end(formDoc) }}
 
-              {{ error }}
+
               </div>
               <div class="col-md-6">
               <table class="table table-inbox table-bordered" >
@@ -69,7 +71,7 @@
                     {#<th>path</th>#}
                   </thead>
                   {% for d in doc  %}
-                      <tr {% if d.matieres.nomMatiere=="JAVA" %} class="info" {% elseif d.matieres.nomMatiere=="C++" %} class="success" {% elseif d.matieres.nomMatiere=="RESEAU" %} class="warning" {% elseif d.matieres.nomMatiere=="ASP.NET" %} class="danger" {% elseif d.matieres.nomMatiere=="ADMIN LINUX" %} class="active" {% endif %}>
+                      <tr {% if d.filieres.nomFiliere=="Genie indus" %} class="info" {% elseif d.filieres.nomFiliere=="CP" %} class="success" {% elseif d.filieres.nomFiliere=="genie EII" %} class="warning" {% elseif d.filieres.nomFiliere=="Genie reseau et telecom" %} class="active" {% elseif d.filieres.nomFiliere=="Genie informatique" %} class="danger" {% endif %}>
                           <td>{{ d.filieres.nomFiliere }}</td>
                           <td>{{ d.classes.nomClasse }}</td>
                           <td>{{ d.matieres.nomMatiere }}</td>

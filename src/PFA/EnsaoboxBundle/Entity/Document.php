@@ -26,7 +26,6 @@ class Document
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\NotBlank
      */
     public $name;
 
@@ -37,8 +36,6 @@ class Document
     /**
      * @Assert\File(
      *     maxSize = "12M",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Please upload a valid PDF"
      * )
      */
     public $file;
