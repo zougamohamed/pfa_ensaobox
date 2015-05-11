@@ -1,11 +1,11 @@
 pfa_ensaobox_homepage:
     path:     /
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:index }
-<<<<<<< HEAD
+
 pfa_ensaobox_ajouter_files:
     path:    /ajouter
     defaults: { _controller: PFAEnsaoboxBundle:Upload:ajouter}
-=======
+
 
 pfa_ensaobox_document_add:
     path:     /document/add/
@@ -40,4 +40,4 @@ pfa_ensaobox_user_delete:
         id: \d+
 
 # ici finis la partie concernant l'utilisateur !!
->>>>>>> ff3c771d04d6a8c37def62d7b9c685e633375988
+
