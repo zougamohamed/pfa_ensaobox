@@ -19,6 +19,11 @@ security:
             logout:       true
             anonymous:    true
 
+        main_reset:
+                    pattern: ^/resetting
+                    logout:       true
+                    anonymous:    true
+
         main:
             pattern: ^/
             form_login:
