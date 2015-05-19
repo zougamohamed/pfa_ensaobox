@@ -24,7 +24,7 @@
                 <p><h1>{{ user.email }}</h1></p>
                 <br>
                 <button type="button" class="btn btn-shadow btn-success" onclick="location.href='edit/{{ user.id }}'">Modifier Profil</button>
-                <button type="button" class="btn btn-shadow btn-danger">Modifier Mot De Passe</button>
+                <button type="button" class="btn btn-shadow btn-danger" onclick="location.href='{{ path("fos_user_resetting_request") }}'">Modifier Mot De Passe</button>
         </div>
 
         <ul class="nav nav-pills nav-stacked">
