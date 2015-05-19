@@ -10,6 +10,7 @@ namespace PFA\EnsaoboxBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -28,6 +29,12 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=30)
+     *@Assert\Length(
+     *     min=3,
+     *     max="40",
+     *     minMessage="Votre nom est trop court !",
+     *     maxMessage="Votre nom est trop long !",
+     * )
      */
 
     private $nom;
@@ -36,6 +43,12 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=30)
+     *@Assert\Length(
+     *     min=3,
+     *     max="40",
+     *     minMessage="Votre prénom est trop court !",
+     *     maxMessage="Votre prénom est trop long !",
+     * )
      */
     private $prenom;
 
@@ -43,6 +56,7 @@ class User extends BaseUser
      * @var \DateTime
      *
      * @ORM\Column(name="date_naissance", type="date")
+     *
      */
     private $dateNaissance;
 
@@ -50,6 +64,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="filiere", type="string", length=30)
+     *
      */
     private $filiere;
 
@@ -71,6 +86,8 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="lien_linkedin", type="string", length=100)
+     * @Assert\Length(max=255)
+     * @Assert\Url()
      */
     private $lienLinkedin;
 
@@ -78,6 +95,8 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="lien_facebook", type="string", length=100)
+     * @Assert\Length(max=100)
+     * @Assert\Url()
      */
     private $lienFacebook;
 
@@ -85,6 +104,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="a_propos", type="text")
+     *
      */
     private $aPropos;
 

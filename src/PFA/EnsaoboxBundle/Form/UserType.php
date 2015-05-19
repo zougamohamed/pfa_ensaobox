@@ -16,13 +16,14 @@ class UserType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('prenom')
-            ->add('dateNaissance')
-            ->add('lienLinkedin')
-            ->add('lienFacebook')
-            ->add('aPropos')
-            ->add('Enregistrer','submit')
-        ;
+            ->add('prenom');
+        $builder->add('dateNaissance','date', array(
+            'years' => range(date('Y') -30, date('Y')-15),
+        ));
+        $builder->add('lienLinkedin','text', array('required' => false));
+        $builder->add('lienFacebook','text', array('required' => false));
+        $builder->add('aPropos', 'text', array('required' => false));
+        $builder->add('Enregistrer','submit');
     }
     
     /**
