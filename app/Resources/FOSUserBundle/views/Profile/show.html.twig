@@ -1,15 +1,15 @@
 {% extends "PFAEnsaoboxBundle::layout.html.twig" %}
 {% block title %}{{ parent() }} - Index{% endblock %}
 {% block pfa_ensaoboxHeader %}
-            {{ parent() }}
+    {{ parent() }}
 {% endblock %}
 {% block pfa_ensaoboxMenu %}
-        {{ parent() }}
+    {{ parent() }}
 {% endblock %}
 {% block pfa_ensaoboxContainer %}
-        <!--main content start-->
+    <!--main content start-->
 
-                            {% include "FOSUserBundle:ChangePassword:changePassword_content.html.twig" %}
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
 {% endblock %}
 
 {% block pfa_ensaoboxFooter %}
