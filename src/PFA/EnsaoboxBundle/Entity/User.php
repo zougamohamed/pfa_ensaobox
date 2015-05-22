@@ -35,56 +35,56 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=30)
+     * @ORM\Column(name="prenom", type="string", length=30, nullable=false)
      */
     private $prenom;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_naissance", type="date")
+     * @ORM\Column(name="date_naissance", type="date", nullable=false)
      */
     private $dateNaissance;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="filiere", type="string", length=30)
+     * @ORM\Column(name="filiere", type="string", length=30, nullable=false)
      */
     private $filiere;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="niveau", type="string", length=20)
+     * @ORM\Column(name="niveau", type="string", length=20, nullable=false)
      */
     private $niveau;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien_avatar", type="string", length=100)
+     * @ORM\Column(name="lien_avatar", type="string", length=100, nullable=false)
      */
     private $lienAvatar;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien_linkedin", type="string", length=100)
+     * @ORM\Column(name="lien_linkedin", type="string", length=100, nullable=false)
      */
     private $lienLinkedin;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien_facebook", type="string", length=100)
+     * @ORM\Column(name="lien_facebook", type="string", length=100, nullable=false)
      */
     private $lienFacebook;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="a_propos", type="text")
+     * @ORM\Column(name="a_propos", type="text", nullable=false)
      */
     private $aPropos;
 
