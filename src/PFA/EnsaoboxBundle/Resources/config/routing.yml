@@ -12,8 +12,8 @@ pfa_ensaobox_document_add:
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:addDocument }
 
 pfa_ensaobox_admin:
-    path:     /admin/
-    defaults: { _controller: PFAEnsaoboxBundle:Dashboard:admin }
+    path:     /admin/createusers
+    defaults: { _controller: PFAEnsaoboxBundle:Admin:createUsers }
 
 
 

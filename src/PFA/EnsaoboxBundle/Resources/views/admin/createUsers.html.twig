@@ -1,0 +1,28 @@
+{# src/ENSAO/EnsaoboxBundle/Resources/views/admin/createUsers.html.twig #}
+
+{% extends "PFAEnsaoboxBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+
+		{% block pfa_ensaoboxHeader %}
+            {{ parent() }}
+        {% endblock %}
+    {% block pfa_ensaoboxMenu %}
+        {{ parent() }}
+    {% endblock %}
+
+    {% block pfa_ensaoboxContainer %}
+        <section id="main-content">
+            <section class="wrapper">
+                {% if error is not empty %}
+                    {{ error }}
+                {% endif %}
+                {{ form(form) }}
+            </section>
+        </section>
+    {% endblock %}
+
+    {% block pfa_ensaoboxFooter %}
+
+    {% endblock %}
