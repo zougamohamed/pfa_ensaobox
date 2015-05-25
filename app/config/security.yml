@@ -19,6 +19,8 @@ security:
             logout:       true
             anonymous:    true
 
+
+
         main_reset:
                     pattern: ^/resetting
                     logout:       true
