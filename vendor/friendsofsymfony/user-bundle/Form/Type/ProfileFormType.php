@@ -32,12 +32,12 @@ class ProfileFormType extends AbstractType
     {
         $this->buildUserForm($builder, $options);
 
-        $builder->add('current_password', 'password', array(
+        /*$builder->add('current_password', 'password', array(
             'label' => 'form.current_password',
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
             'constraints' => new UserPassword(),
-        ));
+        ));*/
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -63,7 +63,16 @@ class ProfileFormType extends AbstractType
     {
         $builder
             ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-        ;
+            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'));
+        $builder
+            ->add('nom')
+            ->add('prenom');
+        $builder->add('dateNaissance','date', array(
+            'years' => range(date('Y') -30, date('Y')-15),
+        ));
+        $builder->add('lienLinkedin','text', array('required' => false));
+        $builder->add('lienFacebook','text', array('required' => false));
+        $builder->add('aPropos', 'text', array('required' => false));
+
     }
 }

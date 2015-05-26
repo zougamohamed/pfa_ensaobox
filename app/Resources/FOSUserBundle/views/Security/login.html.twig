@@ -1,0 +1,71 @@
+{% extends "FOSUserBundle::layout_login.html.twig" %}
+
+{% block fos_user_content %}
+    {% trans_default_domain 'FOSUserBundle' %}
+
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            <div class="login-wrap">
+                <!--Propre à FOSUserBundle-->
+                {% if error %}
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+                <input class="form-control" placeholder="Votre identifiant" autofocus="" id="username" name="_username"
+                       required="required" type="text">
+                <input class="form-control" placeholder="Mot de passe" id="password" name="_password"
+                       required="required" type="password">
+                <label class="checkbox">
+                    <input id="remember_me" name="_remember_me" value="on" type="checkbox"> Se souvenir de moi
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal"> MDP oublié ?</a>
+                </span>
+                </label>
+                <button class="btn btn-lg btn-login btn-block" id="_submit" name="_submit"
+                        value="{{ 'security.login.submit'|trans }}" type="submit">Se Connecter
+                </button>
+            </div>
+        </form>
+
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal"
+         class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Mot de passe oublié ?</h4>
+                </div>
+                <form action="{{ path('fos_user_resetting_send_email') }}" method="POST"
+                      class="fos_user_resetting_request">
+                    <div>
+                        {% if invalid_username is defined %}
+                            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                        {% endif %}
+
+                        <div class="modal-body">
+                            <p>Entrer votre Identifiant ou Email pour recevoir votre Nouveau mot de passe sur votre boite !</p>
+                            <input type="text" class="form-control placeholder-no-fix" id="username" name="username"
+                                   required="required"/>
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-success" type="submit"
+                                   value="{{ 'resetting.request.submit'|trans }}"/>
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('bundles/pfaensaobox/js/jquery.js')}}"></script>
+    <script src="{{ asset('bundles/pfaensaobox/js/bootstrap.min.js')}}"></script>
+
+{% endblock fos_user_content %}
+
+
+
+

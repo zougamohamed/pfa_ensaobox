@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<!-- BEGIN HEAD -->
+<head>
+    <html lang="en">
+    <head>
+
+
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('bundles/pfaensaobox/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/pfaensaobox/css/bootstrap-reset.css')}}" rel="stylesheet">
+
+
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('bundles/pfaensaobox/css/style.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/pfaensaobox/css/style-responsive.css')}}" rel="stylesheet" />
+
+
+
+
+        <meta charset="UTF-8"/>
+        <title>EnsaoBox | Plateforme de partage de documents de l'ENSAO</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+
+    </head>
+    <!-- END HEAD -->
+
+    <!-- BEGIN BODY -->
+    <body class="login">
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        <div class="form-signin">
+            <h2 class="form-signin-heading">Accés à la Plateforme</h2>
+
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    </div>
+
+
+
+    </body>
+    <!-- END BODY -->
+    </html>

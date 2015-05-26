@@ -11,32 +11,8 @@ pfa_ensaobox_afficher_files:
     defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:ajouter}
 
 pfa_ensaobox_admin:
-    path:     /admin/
-    defaults: { _controller: PFAEnsaoboxBundle:Dashboard:admin }
+    path:     /admin/createusers
+    defaults: { _controller: PFAEnsaoboxBundle:Admin:createUsers }
 
-# cette partie est pour ajout, affichage, edition et suppresion d'un utilisateur !!
 
-pfa_ensaobox_user_view:
-    path:      /profile/{id}
-    defaults:  { _controller: PFAEnsaoboxBundle:User:view }
-    requirements:
-        id: \d+
-
-pfa_ensaobox_user_add:
-    path:      /profile/add
-    defaults:  { _controller: PFAEnsaoboxBundle:User:add }
-
-pfa_ensaobox_user_edit:
-    path:      profile/edit/{id}
-    defaults:  { _controller: PFAEnsaoboxBundle:User:edit }
-    requirements:
-        id: \d+
-
-pfa_ensaobox_user_delete:
-    path:      profile/delete/{id}
-    defaults:  { _controller: PFAEnsaoboxBundle:User:delete }
-    requirements:
-        id: \d+
-
-# ici finis la partie concernant l'utilisateur !!
 

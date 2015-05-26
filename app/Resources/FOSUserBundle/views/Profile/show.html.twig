@@ -1,0 +1,16 @@
+{% extends "PFAEnsaoboxBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Index{% endblock %}
+{% block pfa_ensaoboxHeader %}
+    {{ parent() }}
+{% endblock %}
+{% block pfa_ensaoboxMenu %}
+    {{ parent() }}
+{% endblock %}
+{% block pfa_ensaoboxContainer %}
+    <!--main content start-->
+
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+{% endblock %}
+
+{% block pfa_ensaoboxFooter %}
+{% endblock %}

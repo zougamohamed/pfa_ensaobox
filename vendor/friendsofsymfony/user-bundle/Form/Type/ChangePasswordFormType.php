@@ -57,4 +57,5 @@ class ChangePasswordFormType extends AbstractType
     {
         return 'fos_user_change_password';
     }
+
 }
