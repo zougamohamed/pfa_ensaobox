@@ -3,13 +3,12 @@ pfa_ensaobox_homepage:
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:index }
 
 pfa_ensaobox_ajouter_files:
-    path:    /ajouter
+    path:    /prof/document/addFiles
     defaults: { _controller: PFAEnsaoboxBundle:Upload:ajouter}
 
-
-pfa_ensaobox_document_add:
-    path:     /document/add/
-    defaults: { _controller: PFAEnsaoboxBundle:Dashboard:addDocument }
+pfa_ensaobox_afficher_files:
+    path:    /document/showFiles
+    defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:ajouter}
 
 pfa_ensaobox_admin:
     path:     /admin/

@@ -7,12 +7,16 @@ use PFA\EnsaoboxBundle\Entity\Document;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class DashboardController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request )
     {
+        $userType= $this->getUser()->getRoles()[0];
+        $request->getSession()->set('utilisateur',$userType);
 
         return $this->render('PFAEnsaoboxBundle:dashboard:index.html.twig');
+
     }
     public function ajouterAction(Request $request)
     {

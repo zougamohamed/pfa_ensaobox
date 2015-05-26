@@ -27,7 +27,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=30)
+     * @ORM\Column(name="nom", type="string", length=30,nullable=true)
      */
 
     private $nom;
@@ -35,58 +35,105 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=30)
+     * @ORM\Column(name="prenom", type="string", length=30,nullable=true)
      */
     private $prenom;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_naissance", type="date")
+     * @ORM\Column(name="date_naissance", type="date",nullable=true)
      */
     private $dateNaissance;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="filiere", type="string", length=30)
+     * @ORM\Column(name="filiere", type="string", length=30,nullable=true)
      */
     private $filiere;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="niveau", type="string", length=20)
+     * @ORM\Column(name="niveau", type="string", length=20,nullable=true)
      */
     private $niveau;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien_avatar", type="string", length=100)
+     * @ORM\Column(name="lien_avatar", type="string", length=100,nullable=true)
      */
     private $lienAvatar;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien_linkedin", type="string", length=100)
+     * @ORM\Column(name="lien_linkedin", type="string", length=100,nullable=true)
      */
     private $lienLinkedin;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien_facebook", type="string", length=100)
+     * @ORM\Column(name="lien_facebook", type="string", length=100,nullable=true)
      */
     private $lienFacebook;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="a_propos", type="text")
+     * @ORM\Column(name="a_propos", type="text",nullable=true)
      */
     private $aPropos;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PFA\EnsaoboxBundle\Entity\Filieres")
+     */
+    private $filieres;
+
+
+    /**
+     * @return mixed
+     */
+    public function getFilieres()
+    {
+        return $this->filieres;
+    }
+
+    /**
+     * @param mixed $filieres
+     */
+    public function setFilieres($filieres)
+    {
+        $this->filieres = $filieres;
+    }
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PFA\EnsaoboxBundle\Entity\Classes")
+     */
+    private $classes;
+
+    /**
+     * @return mixed
+     */
+    public function getClasses()
+    {
+        return $this->classes;
+    }
+
+
+    /**
+     * @param mixed $classes
+     */
+    public function setClasses($classes)
+    {
+        $this->classes = $classes;
+    }
+
 
 
     /**
