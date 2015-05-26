@@ -10,19 +10,26 @@
                       </a>
                   </li>
                   <li>
-                      <a  href="{{ path('pfa_ensaobox_ajouter_files') }}">
+                      <a  href="#">
                           <i class="fa fa-user"></i>
                           <span>Profile</span>
                       </a>
                   </li>
-                  
-
+                  {% if app.request.session.get('utilisateur')=='ROLE_PROFESSOR' %}
                   <li class="sub-menu">
-                      <a href="#" >
+                      <a href="{{ path('pfa_ensaobox_ajouter_files') }}" >
                           <i class="fa fa-book"></i>
                           <span>Mes cours</span>
                       </a>
                   </li>
+                  {% elseif app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
+                  <li class="sub-menu">
+                      <a href="{{ path('pfa_ensaobox_afficher_files') }}" >
+                          <i class="fa fa-book"></i>
+                          <span>Mes cours</span>
+                      </a>
+                  </li>
+                  {% endif %}
                   <li class="sub-menu">
                       <a href="#" >
                           <i class="fa fa-book"></i>

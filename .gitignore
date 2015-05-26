@@ -2,4 +2,5 @@
 /app/cache/*
 /app/logs/*
 /web/uploads/*
+/web/bundles/*
 /.idea

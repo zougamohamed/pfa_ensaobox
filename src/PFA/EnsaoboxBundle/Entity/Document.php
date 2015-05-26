@@ -25,28 +25,52 @@ class Document
     public $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     public $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
+
     public $path;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $professeur;
+
+
+    /**
+     * @return mixed
+     */
+    public function getProfesseur()
+    {
+        return $this->professeur;
+    }
+
+    /**
+     * @param mixed $professeur
+     */
+    public function setProfesseur($professeur)
+    {
+        $this->professeur = $professeur;
+    }
+
     /**
      * @Assert\File(
-     *     maxSize = "12M",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Please upload a valid PDF"
+     *     maxSize = "10M",
      * )
      */
+
     public $file;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="PFA\EnsaoboxBundle\Entity\Filieres")
      */
     private $filieres;
+
 
     /**
      * @return mixed
@@ -166,27 +190,37 @@ class Document
 //            unlink($file);
 //        }
 //    }
-    public function upload()
+    public function upload($newPath)
     {
         // la propriété « file » peut être vide si le champ n'est pas requis
         if (null === $this->file) {
             return;
         }
 
-        // utilisez le nom de fichier original ici mais
-        // vous devriez « l'assainir » pour au moins éviter
-        // quelconques problèmes de sécurité
+        // utilisez le nom de fichier original ici mais vous devriez « l'assainir » pour au moins éviter quelconques problèmes de sécurité
 
-        // la méthode « move » prend comme arguments le répertoire cible et
-        // le nom de fichier cible où le fichier doit être déplacé
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        // la méthode « move » prend comme arguments le répertoire cible et le nom de fichier cible où le fichier doit être déplacé
+        $this->file->move($this->getUploadRootDir().'/'.$newPath, $this->file->getClientOriginalName());
 
-        // définit la propriété « path » comme étant le nom de fichier où vous
-        // avez stocké le fichier
+        // définit la propriété « path » comme étant le nom de fichier où vous avez stocké le fichier
         $this->path = $this->file->getClientOriginalName();
 
         // « nettoie » la propriété « file » comme vous n'en aurez plus besoin
         $this->file = null;
     }
 
+
+    public  function getPath()
+    {
+        return $this->path;
+    }
+
+    public function showMePath()
+    {
+        if($this->file==null)
+        {
+            return null;
+        }
+        return $this->file->getClientOriginalName();
+    }
 }

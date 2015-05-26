@@ -3,14 +3,6 @@
 {% block fos_user_content %}
     {% trans_default_domain 'FOSUserBundle' %}
 
-
-    <!-- Custom styles for this template -->
-
-    <link href="{{ asset('bundles/pfaensaobox/css/style.css')}}" rel="stylesheet">
-    <link href="{{ asset('bundles/pfaensaobox/css/style-responsive.css')}}" rel="stylesheet" />
-
-
-
         <form action="{{ path("fos_user_security_check") }}" method="post">
             <div class="login-wrap">
                 <!--Propre à FOSUserBundle-->
