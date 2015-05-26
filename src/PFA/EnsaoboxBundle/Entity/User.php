@@ -42,41 +42,27 @@ class User extends BaseUser
     /**
      * @var string
      *
-<<<<<<< HEAD
      * @ORM\Column(name="prenom", type="string", length=30, nullable=false)
-=======
-     * @ORM\Column(name="prenom", type="string", length=30)
      *@Assert\Length(
      *     min=3,
      *     max="40",
      *     minMessage="Votre prénom est trop court !",
      *     maxMessage="Votre prénom est trop long !",
      * )
->>>>>>> c7008100021986db9f63fbc0d950dc50d3237205
      */
     private $prenom;
 
     /**
      * @var \DateTime
-     *
-<<<<<<< HEAD
      * @ORM\Column(name="date_naissance", type="date", nullable=false)
-=======
-     * @ORM\Column(name="date_naissance", type="date")
-     *
->>>>>>> c7008100021986db9f63fbc0d950dc50d3237205
      */
     private $dateNaissance;
 
     /**
      * @var string
      *
-<<<<<<< HEAD
      * @ORM\Column(name="filiere", type="string", length=30, nullable=false)
-=======
-     * @ORM\Column(name="filiere", type="string", length=30)
      *
->>>>>>> c7008100021986db9f63fbc0d950dc50d3237205
      */
     private $filiere;
 
@@ -97,36 +83,27 @@ class User extends BaseUser
     /**
      * @var string
      *
-<<<<<<< HEAD
-     * @ORM\Column(name="lien_linkedin", type="string", length=100, nullable=false)
-=======
-     * @ORM\Column(name="lien_linkedin", type="string", length=100)
+
+     * @ORM\Column(name="lien_linkedin", type="string", length=100, nullable=true)
      * @Assert\Length(max=255)
      * @Assert\Url()
->>>>>>> c7008100021986db9f63fbc0d950dc50d3237205
+
      */
     private $lienLinkedin;
 
     /**
      * @var string
      *
-<<<<<<< HEAD
-     * @ORM\Column(name="lien_facebook", type="string", length=100, nullable=false)
-=======
-     * @ORM\Column(name="lien_facebook", type="string", length=100)
+     * @ORM\Column(name="lien_facebook", type="string", length=100, nullable=true)
      * @Assert\Length(max=100)
      * @Assert\Url()
->>>>>>> c7008100021986db9f63fbc0d950dc50d3237205
      */
     private $lienFacebook;
 
     /**
      * @var string
      *
-<<<<<<< HEAD
      * @ORM\Column(name="a_propos", type="text", nullable=false)
-=======
-     * @ORM\Column(name="a_propos", type="text")
      *
 >>>>>>> c7008100021986db9f63fbc0d950dc50d3237205
      */
@@ -336,7 +313,6 @@ class User extends BaseUser
     public function setAPropos($aPropos)
     {
         $this->aPropos = $aPropos;
-
         return $this;
     }
 
