@@ -77,3 +77,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: PFA\EnsaoboxBundle\Entity\User
+
+# app/config/config.yml
+twig:
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
+        # resources: ['bootstrap_3_horizontal_layout.html.twig']
