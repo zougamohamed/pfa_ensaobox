@@ -1,22 +1,17 @@
 {% extends "FOSUserBundle::layout_login.html.twig" %}
 
-
-
 {% block fos_user_content %}
     {% trans_default_domain 'FOSUserBundle' %}
 
-    {#<!-- Bootstrap core CSS -->#}
-    {#<link href="{{ asset('bundles/pfaensaobox/css/bootstrap.min.css') }}" rel="stylesheet">#}
-    {#<link href="{{ asset('bundles/pfaensaobox/css/bootstrap-reset.css') }}" rel="stylesheet">#}
-    {#<!-- Custom styles for this template -->#}
-    {#<link href="{{ asset('bundles/pfaensaobox/css/style.css') }}" rel="stylesheet">#}
-    {#<link href="{{ asset('bundles/pfaensaobox/css/style-responsive.css') }}" rel="stylesheet">#}
-    {#<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->#}
+
+    <!-- Custom styles for this template -->
+
+    <link href="{{ asset('bundles/pfaensaobox/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('bundles/pfaensaobox/css/style-responsive.css')}}" rel="stylesheet" />
 
 
 
         <form action="{{ path("fos_user_security_check") }}" method="post">
-
             <div class="login-wrap">
                 <!--Propre à FOSUserBundle-->
                 {% if error %}
@@ -37,7 +32,6 @@
                 <button class="btn btn-lg btn-login btn-block" id="_submit" name="_submit"
                         value="{{ 'security.login.submit'|trans }}" type="submit">Se Connecter
                 </button>
-
             </div>
         </form>
 
@@ -58,7 +52,7 @@
                         {% endif %}
 
                         <div class="modal-body">
-                            <p>Entrer votre identifiant pour recevoir votre mot de passe sur votre Mail</p>
+                            <p>Entrer votre Identifiant ou Email pour recevoir votre Nouveau mot de passe sur votre boite !</p>
                             <input type="text" class="form-control placeholder-no-fix" id="username" name="username"
                                    required="required"/>
                         </div>
@@ -69,12 +63,14 @@
                         </div>
                     </div>
                 </form>
-
-
             </div>
         </div>
     </div>
     <!-- modal -->
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('bundles/pfaensaobox/js/jquery.js')}}"></script>
+    <script src="{{ asset('bundles/pfaensaobox/js/bootstrap.min.js')}}"></script>
 
 {% endblock fos_user_content %}
 
