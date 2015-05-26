@@ -13,6 +13,7 @@ use PHPExcel_Reader_Excel2007;
 use PHPExcel_Cell;
 use PHPExcel_Cell_DataType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints\Date;
 
 
 class AdminController extends Controller
@@ -53,16 +54,29 @@ class AdminController extends Controller
                // $file = new UploadedFile();
                 foreach($request->files as $uploadedFile) {
                     $name = $uploadedFile['file']->getClientOriginalName();
+                    $extension = $uploadedFile['file']->getMimeType();
+                    $name = date('Y'). '_' . $name;
+
+                    if($extension != 'application/vnd.ms-excel')
+                    {
+                        return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
+                            'form' => $form->createView(),
+                            'error'=> 'Veuillez choisir un fichier excel !'
+                        ));
+                    }
+
+                    if(file_exists('uploads/documents/'. $name))
+                    {
+                        return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
+                            'form' => $form->createView(),
+                            'error'=> 'Ce fichier existe déjà !'
+                        ));
+                    }
+                    //var_dump( $file  ); die;
+
+
                     $file = $uploadedFile['file']->move('uploads/documents' , $name);
-                    //var_dump( $uploadedFile['file']->guessExtension() ); die;
-                    //if($uploadedFile['file']->getMimeType() != 'application/vnd.ms-excel')
-                    //{
-//
-                    //    return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
-                    //        'form' => $form->createView(),
-                    //        'error'=> 'PLEASE SELECT AN EXCEL FILE !'
-                    //    ));
-                    //}
+
                     $objPHPExcel = PHPExcel_IOFactory::load('uploads\documents\\'.$name);
 
                     foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
