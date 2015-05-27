@@ -29,6 +29,11 @@ class DashboardController extends Controller
             'documentPartage'=>$documentEnregistreByName
         ));
 
+        $user = $this->getUser();
+        $request->getSession()->set('user',$user);
+
+        return $this->render('PFAEnsaoboxBundle:dashboard:index.html.twig');
+
     }
     public function ajouterAction(Request $request)
     {
