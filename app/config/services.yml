@@ -1,9 +1,8 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+     security.authentication.success_handler.class: PFA\EnsaoboxBundle\Handler\LoginSuccessHandler
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    security.authentication.customized_success_handler:
+        class: %security.authentication.success_handler.class%
+        public: false
+        arguments:  [@router, @security.context]
