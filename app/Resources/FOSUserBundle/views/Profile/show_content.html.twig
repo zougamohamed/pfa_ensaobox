@@ -15,8 +15,10 @@
 
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="javascript:;"> <i class="fa fa-user"></i> Nom et prénom : {{ user.nom }} {{ user.prenom }} </a></li>
+                    {% if app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
                     <li><a href="javascript:;"> <i class="fa fa-arrow-up"></i> Niveau : {{ user.niveau }} </a></li>
                     <li><a href="javascript:;"> <i class="fa fa-hand-o-right"></i> Filière : {{ user.filiere }} </a></li>
+                    {% endif %}
                     <li><a href="javascript:;"> <i class="fa fa-calendar"></i> Date de Naissance : {{ user.dateNaissance|date('Y-m-d') }} </a></li>
                     <li><a href="javascript:;"> <i class="fa fa-facebook"></i> Profil Facebook : {{ user.lienFacebook }} </a></li>
                     <li><a href="javascript:;"> <i class="fa fa-linkedin"></i> Compte LinkedIn : {{ user.lienLinkedin }} </a></li>

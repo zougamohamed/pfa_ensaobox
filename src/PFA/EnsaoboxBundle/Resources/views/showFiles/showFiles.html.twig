@@ -17,109 +17,110 @@
             <section class="wrapper">
                 <!-- page start-->
                 <div class="row">
-                <div class="col-md-3">
-                    <section class="panel">
-                        <div class="panel-body">
-                            <input type="text" placeholder="Chercher un cours" class="form-control">
-                        </div>
-                    </section>
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Les cours
-                        </header>
-                        {#{% for d in documentPartage   %}#}
+                    <div class="col-md-3">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="text" placeholder="Chercher un cours" class="form-control">
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Les cours
+                            </header>
+                            {#{% for d in documentPartage   %}#}
                             {#<tr>#}
-                                {#<td>{{ d.matieres.nomMatiere }}</td>#}
-                                {#&#123;&#35;<td><a href="{{ asset('uploads/documents/'~d.filieres.nomFiliere~'/'~d.classes.nomClasse~'/'~userNameSession~'/'~d.matieres.nomMatiere~'/'~d.path) }}">{{ d.path }}</a></td>&#35;&#125;#}
+                            {#<td>{{ d.matieres.nomMatiere }}</td>#}
+                            {#&#123;&#35;<td><a href="{{ asset('uploads/documents/'~d.filieres.nomFiliere~'/'~d.classes.nomClasse~'/'~userNameSession~'/'~d.matieres.nomMatiere~'/'~d.path) }}">{{ d.path }}</a></td>&#35;&#125;#}
                             {#</tr>#}
-                        {#{% endfor %}#}
-                        <div class="panel-body">
-                            <ul class="nav prod-cat">
+                            {#{% endfor %}#}
+                            <div class="panel-body">
+                                <ul class="nav prod-cat">
 
-                                {% for d in matiere  %}
-                                <li><a href="#"><i class=" fa fa-angle-right"></i> {{ d }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                </section>
-                </div>
-                <div class="col-md-9">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div class="pro-sort col-md-4">
-                            {#<label class="pro-lab">Afficher</label>#}
-                            <select class="form-control">
-                                <option>COURS</option>
-                                <option>TD</option>
-                                <option>TP</option>
-                            </select>
-                        </div>
-                        <div class="pull-right">
-                            <ul class="pagination pagination-sm pro-page-list">
-
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">»</a></li>
-                            </ul>
-                        </div>
+                                    {% for d in matiere %}
+                                        <li><a href="#"><i class=" fa fa-angle-right"></i> {{ d }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </section>
                     </div>
-                </section>
+                    <div class="col-md-9">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="pro-sort col-md-4">
+                                    {#<label class="pro-lab">Afficher</label>#}
+                                    <select class="form-control">
+                                        <option>COURS</option>
+                                        <option>TD</option>
+                                        <option>TP</option>
+                                    </select>
+                                </div>
+                                <div class="pull-right">
+                                    <ul class="pagination pagination-sm pro-page-list">
 
-                <div class="row product-list">
-                    {% for cours in documentPartage %}
-                <div class="col-md-3">
-                    <section class="panel">
-                        <div class="pro-img-box">
-                            <img src="{{asset('bundles/pfaensaobox/img/product-list/pro4.jpg')}}" alt=""/>
-                            <a href="#" class="adtocart">
-                                <i class="glyphicon glyphicon-hand-down"></i>
-                            </a>
-                        </div>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">»</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
 
-                        <div class="panel-body text-center">
-                            <h4>
-                                <a href="#" class="pro-title" style="font-size: 10px;">
+                        <div class="row product-list">
+                            {% for cours in documentPartage %}
+                                <div class="col-md-3">
+                                    <section class="panel">
+                                        <div class="pro-img-box">
+                                            <img src="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}"
+                                                 alt=""/>
+                                            <a href="#" class="adtocart">
+                                                <i class="glyphicon glyphicon-hand-down"></i>
+                                            </a>
+                                        </div>
 
-                                    {% if 'INTERCONNEXION RESEAU' in matiere %}
-                                    {{ cours.path }}
-                                    {% endif %}
+                                        <div class="panel-body text-center">
+                                            <h4>
+                                                <a href="#" class="pro-title" style="font-size: 10px;">
 
-                                </a>
-                            </h4>
-                        </div>
-                    </section>
-                </div>
-                {% endfor %}
+                                                    {{ cours.path }}
 
-                {#</div>#}
-                    {#<div class="col-md-4">#}
-                        {#<section class="panel">#}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                    </section>
+                                </div>
+                            {% endfor %}
+
+                            {#</div>#}
+                            {#<div class="col-md-4">#}
+                            {#<section class="panel">#}
                             {#<div class="pro-img-box">#}
-                                {#&#123;&#35;<img src="img/product-list/pro-1.jpg" alt=""/>&#35;&#125;#}
-                                {#<img src="{{asset('bundles/pfaensaobox/img/product-list/pro4.jpg')}}" alt=""/>#}
-                                {#<a href="#" class="adtocart">#}
-                                    {#<i class="fa fa-shopping-cart"></i>#}
-                                {#</a>#}
+                            {#&#123;&#35;<img src="img/product-list/pro-1.jpg" alt=""/>&#35;&#125;#}
+                            {#<img src="{{asset('bundles/pfaensaobox/img/product-list/pro4.jpg')}}" alt=""/>#}
+                            {#<a href="#" class="adtocart">#}
+                            {#<i class="fa fa-shopping-cart"></i>#}
+                            {#</a>#}
                             {#</div>#}
 
                             {#<div class="panel-body text-center">#}
-                                {#<h4>#}
-                                    {#<a href="#" class="pro-title">#}
-                                        {#Leopard Shirt Dress#}
-                                    {#</a>#}
-                                {#</h4>#}
-                                {#<p class="price">$300.00</p>#}
+                            {#<h4>#}
+                            {#<a href="#" class="pro-title">#}
+                            {#Leopard Shirt Dress#}
+                            {#</a>#}
+                            {#</h4>#}
+                            {#<p class="price">$300.00</p>#}
                             {#</div>#}
-                        {#</section>#}
-                    {#</div>#}
-                {#</div>#}
-                </div>
-                <!-- page end-->
-                </section>
-                </section>
+                            {#</section>#}
+                            {#</div>#}
+                            {#</div>#}
+                        </div>
+                        <!-- page end-->
+                    </div>
+                    </div>
+            </section>
+        </section>
     {% endblock %}
     {% block pfa_ensaoboxFooter %}
 

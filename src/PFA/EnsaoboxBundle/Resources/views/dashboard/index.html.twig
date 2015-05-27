@@ -6,15 +6,48 @@
 
 
 		{% block pfa_ensaoboxHeader %}
-           	{{ parent() }}
-    {% endblock %}
+            {{ parent() }}
+        {% endblock %}
     {% block pfa_ensaoboxMenu %}
-           {{ parent() }}
+        {{ parent() }}
     {% endblock %}
   	{% block pfa_ensaoboxContainer %}
-            {{ include('PFAEnsaoboxBundle:dashboard:main_container.html.twig') }}
+        {#{{ include('PFAEnsaoboxBundle:dashboard:main_container.html.twig') }}#}
+        <!--main content start-->
+        {{ parent() }}
+        <section id="main-content">
+            <section class="wrapper">
+                <!-- page start-->
+                <section class="panel">
+                    <header class="panel-heading">
+                        Les derniers cours partagés
+                    </header>
+                    <div class="panel-body">
+                        <ul class="grid cs-style-3">
+                            {% for cours in documentPartage %}
+                            <li>
+                                <figure>
+                                    <img src="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}" alt="img04">
+                                    <figcaption>
+                                        <h3>Mindblowing</h3>
+                                        <span>lorem ipsume </span>
+                                        <a class="fancybox" rel="group"
+                                           href="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}">Chap7 reseau</a>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                </section>
+
+                <!-- page end-->
+            </section>
+        </section>
+        <!--main content end-->
     {% endblock %}
     {% block pfa_ensaoboxFooter %}
-            
+
     {% endblock %}
         
