@@ -14,8 +14,20 @@ class DashboardController extends Controller
     {
         $userType= $this->getUser()->getRoles()[0];
         $request->getSession()->set('utilisateur',$userType);
-
-        return $this->render('PFAEnsaoboxBundle:dashboard:index.html.twig');
+        $niveau= $this->getUser()->getClasses()->getId();
+        $filiere= $this->getUser()->getFilieres()->getId();
+        $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:Document");
+        $query = $repository->createQueryBuilder('documentPartage')
+            ->where('documentPartage.filieres = :filiere')
+            ->setParameter('filiere',$filiere)
+            ->andWhere('documentPartage.classes = :classe')
+            ->setParameter('classe', $niveau)
+            ->setMaxResults(10)
+            ->getQuery();
+        $documentEnregistreByName = $query->getResult();
+        return $this->render('PFAEnsaoboxBundle:dashboard:index.html.twig', array(
+            'documentPartage'=>$documentEnregistreByName
+        ));
 
     }
     public function ajouterAction(Request $request)
