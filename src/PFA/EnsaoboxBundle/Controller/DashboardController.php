@@ -15,6 +15,9 @@ class DashboardController extends Controller
         $userType= $this->getUser()->getRoles()[0];
         $request->getSession()->set('utilisateur',$userType);
 
+        $user = $this->getUser();
+        $request->getSession()->set('user',$user);
+
         return $this->render('PFAEnsaoboxBundle:dashboard:index.html.twig');
 
     }
