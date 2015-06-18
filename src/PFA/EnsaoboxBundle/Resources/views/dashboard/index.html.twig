@@ -24,6 +24,7 @@
                     </header>
                     <div class="panel-body">
                         <ul class="grid cs-style-3">
+                            {% for cours in documentPartage %}
                             <li>
                                 <figure>
                                     <img src="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}" alt="img04">
@@ -35,6 +36,7 @@
                                     </figcaption>
                                 </figure>
                             </li>
+                            {% endfor %}
                         </ul>
 
                     </div>

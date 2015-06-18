@@ -73,6 +73,7 @@ class ProfileFormType extends AbstractType
         $builder->add('lienLinkedin','text', array('required' => false));
         $builder->add('lienFacebook','text', array('required' => false));
         $builder->add('aPropos', 'text', array('required' => false));
+        $builder->add('profilePictureFile', 'file', array('required' => false));
 
     }
 }
