@@ -28,6 +28,13 @@ class Matieres
      */
     private $nomMatiere;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="professeur", type="string", length=255, nullable=true)
+     */
+    private $professeur;
+
 
     /**
      * Get id
@@ -61,4 +68,26 @@ class Matieres
     {
         return $this->nomMatiere;
     }
+
+
+    /**
+     * Set professeur
+     *
+     * @param string $professeur
+     */
+    public function setProfesseur($professeur)
+    {
+        $this->professeur = $professeur;
+    }
+
+    /**
+     * Get professeur
+     *
+     * @return string
+     */
+    public function getProfesseur()
+    {
+        return $this->professeur;
+    }
+
 }
