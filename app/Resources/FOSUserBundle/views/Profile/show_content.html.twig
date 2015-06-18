@@ -6,19 +6,26 @@
         <aside class="profile-nav alt blue-border">
             <section class="panel">
                 <div class="twt-feed blue-bg">
-                    <p></p><h2>{{ user.username }}</h2></p>
-                    <p><h1>{{ user.email }}</h1></p>
-                    <br>
+
+                     {#à modifier le chemin de la photo de profil une fois sur un serveur Réel#}
+                    <a href="#">
+                    <img alt=""  src="http://localhost/pfa_ensaobox/web{{ user.getWebProfilePicturePath() }}">
+                    </a>
+
+                    <br><br><br>
+                    <h3>{{ user.username }}</h3>
+                    <h4>{{ user.email }}</h4>
                     <button type="button" class="btn btn-shadow btn-success" onclick="location.href='{{ path("fos_user_profile_edit") }}'">Modifier Profil</button>
                     <button type="button" class="btn btn-shadow btn-danger" onclick="location.href='{{ path("fos_user_change_password") }}'">Modifier Mot De Passe</button>
+
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="javascript:;"> <i class="fa fa-user"></i> Nom et prénom : {{ user.nom }} {{ user.prenom }} </a></li>
-                    {% if app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
+                    {#{% if app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}#}
                     <li><a href="javascript:;"> <i class="fa fa-arrow-up"></i> Niveau : {{ user.niveau }} </a></li>
                     <li><a href="javascript:;"> <i class="fa fa-hand-o-right"></i> Filière : {{ user.filiere }} </a></li>
-                    {% endif %}
+                    {#{% endif %}#}
                     <li><a href="javascript:;"> <i class="fa fa-calendar"></i> Date de Naissance : {{ user.dateNaissance|date('Y-m-d') }} </a></li>
                     <li><a href="javascript:;"> <i class="fa fa-facebook"></i> Profil Facebook : {{ user.lienFacebook }} </a></li>
                     <li><a href="javascript:;"> <i class="fa fa-linkedin"></i> Compte LinkedIn : {{ user.lienLinkedin }} </a></li>

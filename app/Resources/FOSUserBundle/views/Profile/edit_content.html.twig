@@ -81,6 +81,16 @@
                                 {{ form_errors(form.aPropos) }}
                             </div>
                         </div>
+
+                        <div class="form-group ">
+                            {{ form_label(form.profilePictureFile, "* Photo de Profil :", {'label_attr': {'class': 'control-label col-lg-2' }}
+                            ) }}
+                            <div class="col-lg-10">
+                                {{ form_widget(form.profilePictureFile, {'attr': {'class': 'form-control valid' }}) }}
+                                {{ form_errors(form.profilePictureFile) }}
+                            </div>
+                        </div>
+
                         <b>* : Champs facultatifs</b>
                         <br>
                         <br>
