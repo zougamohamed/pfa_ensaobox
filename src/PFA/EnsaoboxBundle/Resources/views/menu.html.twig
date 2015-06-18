@@ -3,12 +3,21 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
+                  {% if app.request.session.get('utilisateur')=='ROLE_ADMIN' %}
+                  <li>
+                      <a class="active"  href="{{ path('pfa_ensaobox_admin') }}">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Index</span>
+                      </a>
+                  </li>
+                  {% else %}
                   <li>
                       <a class="active"  href="{{ path('pfa_ensaobox_homepage') }}">
                           <i class="fa fa-dashboard"></i>
                           <span>Index</span>
                       </a>
                   </li>
+                  {% endif %}
                   <li>
                       <a  href="{{ path('fos_user_profile_show') }}">
                           <i class="fa fa-user"></i>
