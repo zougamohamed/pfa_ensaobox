@@ -3,7 +3,7 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
-<<<<<<< HEAD
+
                   {% if app.request.session.get('utilisateur')=='ROLE_ADMIN' %}
                   <li>
                       <a class="active"  href="{{ path('pfa_ensaobox_admin') }}">
@@ -18,15 +18,7 @@
                           <span>Index</span>
                       </a>
                   </li>
-=======
-                  {% if app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
-                      <li class="sub-menu">
-                          <a href="{{ path('pfa_ensaobox_homepage') }}" >
-                              <i class="fa fa-dashboard"></i>
-                              <span>Index</span>
-                          </a>
-                      </li>
->>>>>>> 5840909477ae941956da484e14f529c37461dc83
+
                   {% endif %}
                   <li>
                       <a  href="{{ path('fos_user_profile_show') }}">
