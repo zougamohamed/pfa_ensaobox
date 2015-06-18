@@ -32,6 +32,10 @@ class DashboardController extends Controller
         $user = $this->getUser();
         $request->getSession()->set('user',$user);
 
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
+            return $this->redirect($this->generateUrl('pfa_ensaobox_admin'));
+
+
         return $this->render('PFAEnsaoboxBundle:dashboard:index.html.twig');
 
     }

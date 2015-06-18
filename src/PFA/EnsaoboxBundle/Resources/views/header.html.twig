@@ -4,7 +4,11 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
+          {% if app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
             <a href="{{ path('pfa_ensaobox_homepage') }}" class="logo">ENSAO<span>BOX</span></a>
+          {% elseif app.request.session.get('utilisateur')=='ROLE_PROFESSOR' %}
+              <a href="{{ path('fos_user_profile_show') }}" class="logo">ENSAO<span>BOX</span></a>
+          {% endif %}
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
