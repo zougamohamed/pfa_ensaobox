@@ -11,7 +11,7 @@ pfa_ensaobox_afficher_files:
     defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:ajouter}
 
 pfa_ensaobox_admin:
-    path:     /admin/createusers
+    path:     /admin
     defaults: { _controller: PFAEnsaoboxBundle:Admin:createUsers }
 
 
