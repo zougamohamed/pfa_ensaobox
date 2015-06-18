@@ -1,0 +1,55 @@
+{# src/ENSAO/EnsaoboxBundle/Resources/views/showFiles/index.html.twig #}
+
+{% extends "PFAEnsaoboxBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+
+		{% block pfa_ensaoboxHeader %}
+            {{ parent() }}
+        {% endblock %}
+    {% block pfa_ensaoboxMenu %}
+        {{ parent() }}
+    {% endblock %}
+  	{% block pfa_ensaoboxContainer %}
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <!-- page start-->
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row product-list">
+                            {% for user in liste %}
+                                <div class="col-md-3">
+                                    <section class="panel">
+                                        <div class="pro-img-box">
+                                                <a href="#">
+                                                     <img alt=""  src="{{asset( 'uploads/'~user.getWebProfilePicturePath() )}}">
+                                                </a>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <h4>
+                                                <a href="#" class="pro-title" style="font-size: 10px;">
+                                                    {{ user.nom }} {{ user.prenom }}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                    </section>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <!-- page end-->
+                        <button type="button" class="btn btn-shadow btn-danger"
+                                onclick="location.href='{{ path("fos_user_change_password") }}'">Génerer PDF
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </section>
+    {% endblock %}
+    {% block pfa_ensaoboxFooter %}
+
+    {% endblock %}
+        
