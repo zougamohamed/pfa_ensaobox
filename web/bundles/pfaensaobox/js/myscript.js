@@ -11,4 +11,17 @@ $( "#filiere" ).change(function()
     }
 });
 
+$( "#filiereu" ).change(function()
+{
+    if($( "#filiereu option:selected").text() == 'STPI')
+    {
+        $('#niveauu option[value="3"]').hide();
+        $('#niveauu option[value="1"]').attr("selected","selected");
+    }
+    else
+    {
+        $('#niveauu option[value="3"]').show();
+    }
+});
+
 

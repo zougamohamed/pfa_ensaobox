@@ -165,7 +165,6 @@ class User extends BaseUser
     {
         return $this->filieres;
     }
-
     /**
      * @param mixed $filieres
      */

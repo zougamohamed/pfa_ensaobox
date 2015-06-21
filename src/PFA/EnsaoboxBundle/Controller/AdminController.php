@@ -3,6 +3,7 @@
 namespace PFA\EnsaoboxBundle\Controller;
 
 
+use PFA\EnsaoboxBundle\Entity\Classes;
 use PFA\EnsaoboxBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,22 +19,22 @@ use Symfony\Component\Validator\Constraints\Date;
 
 class AdminController extends Controller
 {
-    public function createUsersAction(Request $request)
+    public function createUsersAction(Request $request, $f, $n, $u)
     {
         $filieres = array
         (
-            'GI'     => 'GI',
-            'GTR'    => 'GTR',
-            'GINDUS' => 'GINDUS',
-            'GC'     => 'GC',
-            'GE'     => 'GE',
-            'GEII'   => 'GEII',
-            'STPI'   => 'STPI'
+            '1'     => 'GI',
+            '2'    => 'GTR',
+            '3'   => 'GEII',
+            '4'     => 'GE',
+            '5' => 'GINDUS',
+            '6'     => 'GC',
+            '7'   => 'STPI'
         );
 
         $niveaux = array
         (
-            '1' => '1er année',
+            '1' => '1ère année',
             '2' => '2ème année',
             '3' => '3ème année'
         );
@@ -52,12 +53,49 @@ class AdminController extends Controller
             ->add('show', 'submit', array('attr' => array('class' => 'btn btn-success','style' => 'font-size:17px ')))
             ->getForm();
 
-        $form_new = $this->createFormBuilder()
+        $form_new = $this->get('form.factory')->createNamedBuilder('new','form')
             ->add('upgrade', 'submit', array('attr' => array('class' => 'btn btn-danger','style' => 'font-size:17px ')))
             ->getForm();
 
-        if ($request->isMethod('POST'))
+        //Si la requete provient du formulaire ou de l'un des bouttons de suppression
+        if ($request->isMethod('POST') || $u != '' )
         {
+            //Si la requete provient de l'un des bouttons de suppression
+            if($u != '' && !$request->isMethod('POST'))
+            {
+                // on supprime l'utilisateur et on le redirige vers la page d'administration avec affichage de la liste
+                $em = $this->getDoctrine()->getManager();
+                $etudiants = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User")->findBy(array('id' => intval($u)));
+                foreach($etudiants as $etudiant)
+                {
+                    $em->remove($etudiant);
+                }
+
+                $em->flush();
+
+//                $listeEtudiants = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User")->findBy(array('filiere' => $f,
+//                    'niveau' => $n));
+
+                $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                $query = $repository->createQueryBuilder('x')
+                    ->where('x.filieres = :filiere')
+                    ->setParameter('filiere',$f)
+                    ->andWhere('x.classes = :classe')
+                    ->setParameter('classe', $n)
+                    ->getQuery();
+                $listeEtudiants = $query->getResult();
+
+                return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
+                    'form_create' => $form_create->createView(),
+                    'form_update' => $form_update->createView(),
+                    'form_new' => $form_new->createView(),
+//                            'usersforms' => $users_update_form_view,
+                    'error' => '',
+                    'liste' => $listeEtudiants
+                ));
+
+
+            }
             // Si c'est le formulaire de création qui est submité
             if ($request->request->has('create'))
             {
@@ -92,7 +130,7 @@ class AdminController extends Controller
                                 'form_create' => $form_create->createView(),
                                 'form_update' => $form_update->createView(),
                                 'form_new' => $form_new->createView(),
-                                'error' => 'Veuillez choisir un fichier excel !'
+                                'error' => 'Veuillez choisir un fichier excel !',
                             ));
                         }
 
@@ -102,7 +140,7 @@ class AdminController extends Controller
                                 'form_create' => $form_create->createView(),
                                 'form_update' => $form_update->createView(),
                                 'form_new' => $form_new->createView(),
-                                'error' => 'Ce fichier existe déjà !'
+                                'error' => 'Ce fichier existe déjà !',
                             ));
                         }
                         //var_dump( $file  ); die;
@@ -128,8 +166,8 @@ class AdminController extends Controller
                             // Detection du point de départ des données.
                             //-------------------------------------
 
-                            $startcol = 0;
-                            $startrow = 0;
+                            $startcol = -1;
+                            $startrow = -1;
 
                             for ($row = 0; $row <= $highestRow; ++$row)
                             {
@@ -149,6 +187,15 @@ class AdminController extends Controller
                                     //echo '<td>' . $val . '<br>(Typ ' . $dataType . ')</td>';
                                 }
                                 //echo '</tr>';
+                            }
+                            if($startcol == -1)
+                            {
+                                return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
+                                    'form_create' => $form_create->createView(),
+                                    'form_update' => $form_update->createView(),
+                                    'form_new' => $form_new->createView(),
+                                    'error' => 'Ce fichier excel ne contient pas la liste des étudiants !',
+                                ));
                             }
                             //var_dump($startcol);
                             //var_dump($startrow);
@@ -211,52 +258,123 @@ class AdminController extends Controller
                                         }
                                     }
                                 }
+                                //var_dump(1);
+                                $listeClasses = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:Classes")->findBy(array('id' => $niveau));
+                                foreach($listeClasses as $niv)
+                                {
+                                    //$classe = new Classes();
+                                    //$classe->setNomClasse($niv[''])
+                                    //var_dump($niv);
+                                    $user->setClasses($niv);
+                                }
+
+                                $listeFilieres = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:Filieres")->findBy(array('id' => $filiere));
+                                foreach($listeFilieres as $fil)
+                                {
+                                    //var_dump($fil);
+                                    $user->setFilieres($fil);
+                                }
+
                                 $user->setUsername($username);
                                 $user->setRoles(array('ROLE_ETUDIANT'));
-                                $user->setNiveau($niveau);
-                                $user->setFiliere($filiere);
                                 $user->setEnabled(true);
 
                                 $users[$j] = $user;
                                 $j++;
                             }
-
+                            //var_dump(1); die;
                             //var_dump($users); die;
 
                             //--------------------------------------
 
                             //Insertion des étudiants en base de donnée.
-                            //--------------------------------------
+                            //--------------------------------------------------
                             //$em = $this->getDoctrine()->getManager();
-
-
                             for ($i = 0; $i < count($users); $i++)
                             {
                                 $userManager->updateUser($users[$i],true);
                             }
                             //$em->flush();
-                            //--------------------------------------
+                            //--------------------------------------------------
+                        }
+                    }
+                }
+
+                return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
+                    'form_create' => $form_create->createView(),
+                    'form_update' => $form_update->createView(),
+                    'form_new' => $form_new->createView(),
+                    'error' => '',
+                    'success' => 'Les étudiants ont été généré avec succès !'
+                ));
+            }
+
+            //si le formulaire d'update est submité (formulaire à droite)
+            elseif ($request->request->has('update'))
+            {
+                $form_update->handleRequest($request);
+
+                if ($form_update->isValid())
+                {
+                    // Si on clique sur afficher on affiche la liste
+                    if ($form_update->get('show')->isClicked())
+                    {
+//                        $listeEtudiants = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User")->findBy(array('filiere' => $form_update['filiere']->getData(),
+//                            'niveau' => $form_update['niveau']->getData()));
+
+                        $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                        $query = $repository->createQueryBuilder('x')
+                            ->where('x.filieres = :filiere')
+                            ->setParameter('filiere',$form_update['filiere']->getData())
+                            ->andWhere('x.classes = :classe')
+                            ->setParameter('classe', $form_update['niveau']->getData())
+                            ->getQuery();
+                        $listeEtudiants = $query->getResult();
+
+                        return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
+                            'form_create' => $form_create->createView(),
+                            'form_update' => $form_update->createView(),
+                            'form_new' => $form_new->createView(),
+//                            'usersforms' => $users_update_form_view,
+                            'error' => '',
+                            'liste' => $listeEtudiants
+                        ));
+                    }
+                    // si on clique sur supprimer on efface la liste
+                    elseif($form_update->get('delete')->isClicked())
+                    {
+                        $em = $this->getDoctrine()->getManager();
+//                        $listeEtudiants = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User")->findBy(array('filiere' => $form_update['filiere']->getData(),
+//                            'niveau' => $form_update['niveau']->getData()));
+
+                        $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                        $query = $repository->createQueryBuilder('x')
+                            ->where('x.filieres = :filiere')
+                            ->setParameter('filiere',$form_update['filiere']->getData())
+                            ->andWhere('x.classes = :classe')
+                            ->setParameter('classe', $form_update['niveau']->getData())
+                            ->getQuery();
+                        $listeEtudiants = $query->getResult();
 
 
+                        foreach( $listeEtudiants as $user )
+                        {
+                            $em->remove($user);
                         }
 
+                        $em->flush();
+
+                        return $this->redirect($this->generateUrl('pfa_ensaobox_admin'));
                     }
-
-                    //ICI On récuperera nos données à partir du fichier excel excel
-                    //$a = new PHPExcel();
-                    //$objReader = \PHPExcel_IOFactory::createReader();
-                    //var_dump($a); die;
-
-                    //-------------------
-                    //var_dump($_FILES['file']); die;
                 }
             }
         }
+        // Si on reçoit la page pour la 1ere fois, on l'affiche
         return $this->render('PFAEnsaoboxBundle:admin:createUsers.html.twig', array(
             'form_create' => $form_create->createView(),
             'form_update' => $form_update->createView(),
             'form_new' => $form_new->createView(),
-            'error'=> ''
+            'error'=> '',
         ));
     }
 }
