@@ -522,7 +522,7 @@ class User extends BaseUser
         // the type param is to change these methods at a later date for more file uploads
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'user/profilepics';
+        return 'uploads/user/profilepics';
     }
 
     /**

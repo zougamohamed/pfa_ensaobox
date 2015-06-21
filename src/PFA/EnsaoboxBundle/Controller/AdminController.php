@@ -20,6 +20,8 @@ class AdminController extends Controller
 {
     public function createUsersAction(Request $request)
     {
+        $userType= $this->getUser()->getRoles()[0];
+        $request->getSession()->set('utilisateur',$userType);
         $filieres = array
         (
             'GI'     => 'GI',
