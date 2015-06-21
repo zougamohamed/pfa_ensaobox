@@ -20,6 +20,8 @@ class AdminController extends Controller
 {
     public function createUsersAction(Request $request)
     {
+        $userType= $this->getUser()->getRoles()[0];
+        $request->getSession()->set('utilisateur',$userType);
         $filieres = array
         (
             'GI'     => 'GI',
@@ -33,9 +35,9 @@ class AdminController extends Controller
 
         $niveaux = array
         (
-            '1' => '1er année',
-            '2' => '2ème année',
-            '3' => '3ème année'
+            '1' => '1er annee',
+            '2' => '2eme annee',
+            '3' => '3eme annee'
         );
 
         $form_create = $this->get('form.factory')->createNamedBuilder('create','form')

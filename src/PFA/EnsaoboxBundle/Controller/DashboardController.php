@@ -12,19 +12,26 @@ class DashboardController extends Controller
 {
     public function indexAction(Request $request )
     {
+        $filiere= $this->getUser()->getFilieres();
+        $niveau= $this->getUser()->getClasses();
         $userType= $this->getUser()->getRoles()[0];
+
+        $request->getSession()->set('filiere',$filiere->getNomFiliere());
+        $request->getSession()->set('niveau',$niveau->getNomClasse());
         $request->getSession()->set('utilisateur',$userType);
-        $niveau= $this->getUser()->getClasses()->getId();
-        $filiere= $this->getUser()->getFilieres()->getId();
+
+
         $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:Document");
         $query = $repository->createQueryBuilder('documentPartage')
             ->where('documentPartage.filieres = :filiere')
-            ->setParameter('filiere',$filiere)
+            ->setParameter('filiere',$filiere->getId())
             ->andWhere('documentPartage.classes = :classe')
-            ->setParameter('classe', $niveau)
-            ->setMaxResults(10)
+            ->setParameter('classe', $niveau->getId())
+            ->orderBy('documentPartage.id', 'DESC')
+            ->setMaxResults(12)
             ->getQuery();
         $documentEnregistreByName = $query->getResult();
+//        var_dump($documentEnregistreByName);
         return $this->render('PFAEnsaoboxBundle:dashboard:index.html.twig', array(
             'documentPartage'=>$documentEnregistreByName
         ));

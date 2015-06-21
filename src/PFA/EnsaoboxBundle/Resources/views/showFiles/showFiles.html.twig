@@ -20,9 +20,16 @@
                     <div class="col-md-3">
                         <section class="panel">
                             <div class="panel-body">
-                                <input type="text" placeholder="Chercher un cours" class="form-control">
+                                {#<input type="text" placeholder="Chercher un cours" class="form-control">#}
+                                <form id="recherche_form" role="form" action="{{ path('pfa_ensaobox_recherche') }}" method="get">`
+                                    <div class="form-group col-md-8">
+                                        <input type="text" placeholder="Chercher un cours" name="cours" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </section>
+
                         <section class="panel">
                             <header class="panel-heading">
                                 Les cours
@@ -35,9 +42,9 @@
                             {#{% endfor %}#}
                             <div class="panel-body">
                                 <ul class="nav prod-cat">
-
+                                    <li><a href="{{ path('pfa_ensaobox_afficher_files') }}" ><i>=</i><i class=" fa fa-angle-right"></i>TOUS LES COURS</a></li>
                                     {% for d in matiere %}
-                                        <li><a href="#"><i class=" fa fa-angle-right"></i> {{ d }}</a></li>
+                                        <li><a href={{d|url_encode}}><i>=</i><i class=" fa fa-angle-right"></i>{{ d }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -55,16 +62,31 @@
                                     </select>
                                 </div>
                                 <div class="pull-right">
-                                    <ul class="pagination pagination-sm pro-page-list">
+                                    {#<ul class="pagination pagination-sm pro-page-list">#}
+                                    {#<li><a href="#">1</a></li>#}
+                                    {#<li><a href="#">2</a></li>#}
+                                    {#<li><a href="#">3</a></li>#}
+                                    {#<li><a href="#">4</a></li>#}
+                                    {#<li><a href="#">5</a></li>#}
+                                    {#<li><a href="#">»</a></li>#}
+                                    {#</ul>#}
+                                    {% if current_page is defined and total_pages is defined%}
+                                        <ul class="pagination pagination-sm pro-page-list">
+                                            {% for i in range(max(current_page-4, 1),min(current_page+4, total_pages)) %}
+                                                {#{%for i in 1..current_page-4%}#}
+                                                {%if loop.first %}
+                                                    <li class="prev {%if current_page==1%} disabled{%endif%}"><a href="{{path('pfa_ensaobox_afficher_files',{'page':current_page-1})}}">← Page Précédent</a></li>
+                                                {%endif%}
+                                                {#<li {%if current_page==loop.index%} class="active"{%endif%}><a href="{{path('pfa_ensaobox_afficher_files',{'page':loop.index})}}">{{loop.index}}</a></li>#}
 
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">»</a></li>
-                                    </ul>
+                                                {%if loop.last %}
+                                                    <li class="next{%if current_page==total_pages%} disabled {%endif%}"><a href="{{path('pfa_ensaobox_afficher_files',{'page':current_page+1})}}">Page Suivante → </a></li>
+                                                {%endif%}
+                                            {%endfor%}
+                                        </ul>
+                                    {% endif %}
                                 </div>
+
                             </div>
                         </section>
 
@@ -82,43 +104,18 @@
 
                                         <div class="panel-body text-center">
                                             <h4>
-                                                <a href="#" class="pro-title" style="font-size: 10px;">
-
-                                                    {{ cours.path }}
-
-                                                </a>
+                                                    <a class="pro-title" style="font-size: 12px; height: 35px" href="{{ asset('uploads/documents/'~cours.filieres.nomFiliere~'/'~cours.classes.nomClasse~'/'~cours.professeur~'/'~cours.matieres.nomMatiere~'/'~cours.path) }}">
+                                                        {{ cours.path }}
+                                                    </a>
                                             </h4>
                                         </div>
                                     </section>
                                 </div>
                             {% endfor %}
-
-                            {#</div>#}
-                            {#<div class="col-md-4">#}
-                            {#<section class="panel">#}
-                            {#<div class="pro-img-box">#}
-                            {#&#123;&#35;<img src="img/product-list/pro-1.jpg" alt=""/>&#35;&#125;#}
-                            {#<img src="{{asset('bundles/pfaensaobox/img/product-list/pro4.jpg')}}" alt=""/>#}
-                            {#<a href="#" class="adtocart">#}
-                            {#<i class="fa fa-shopping-cart"></i>#}
-                            {#</a>#}
-                            {#</div>#}
-
-                            {#<div class="panel-body text-center">#}
-                            {#<h4>#}
-                            {#<a href="#" class="pro-title">#}
-                            {#Leopard Shirt Dress#}
-                            {#</a>#}
-                            {#</h4>#}
-                            {#<p class="price">$300.00</p>#}
-                            {#</div>#}
-                            {#</section>#}
-                            {#</div>#}
-                            {#</div>#}
                         </div>
                         <!-- page end-->
                     </div>
-                    </div>
+                </div>
             </section>
         </section>
     {% endblock %}
