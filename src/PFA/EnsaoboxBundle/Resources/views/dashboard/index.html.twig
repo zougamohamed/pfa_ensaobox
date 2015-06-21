@@ -22,25 +22,50 @@
                     <header class="panel-heading">
                         Les derniers cours partagés
                     </header>
-                    <div class="panel-body">
-                        <ul class="grid cs-style-3">
-                            {% for cours in documentPartage %}
-                            <li>
-                                <figure>
-                                    <img src="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}" alt="img04">
-                                    <figcaption>
-                                        <h3>Mindblowing</h3>
-                                        <span>lorem ipsume </span>
-                                        <a class="fancybox" rel="group"
-                                           href="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}">Chap7 reseau</a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            {% endfor %}
-                        </ul>
-
-                    </div>
                 </section>
+
+                <div class="row product-list">
+                        {% for cours in documentPartage %}
+                            <div class="col-md-2">
+                                <section class="panel">
+                                    <div class="pro-img-box">
+                                        <img src="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}" alt=""/>
+                                        <a href="#" class="adtocart">
+                                            <i class="glyphicon glyphicon-hand-down"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="panel-body text-center">
+                                        <h4>
+                                            <a class="pro-title" style="font-size: 14px; height: 65px" href="{{ asset('uploads/documents/'~cours.filieres.nomFiliere~'/'~cours.classes.nomClasse~'/'~cours.professeur~'/'~cours.matieres.nomMatiere~'/'~cours.path) }}">
+
+                                                {{ cours.path }}
+
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </section>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {#<div class="panel-body">#}
+                        {#<ul class="grid cs-style-3">#}
+                            {#{% for cours in documentPartage %}#}
+                            {#<li>#}
+                                {#<figure>#}
+                                    {#<img src="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}" alt="img04">#}
+                                    {#<figcaption>#}
+                                        {#<h3>Mindblowing</h3>#}
+                                        {#<span>lorem ipsume </span>#}
+                                        {#<a class="fancybox" rel="group"#}
+                                           {#href="{{ asset('bundles/pfaensaobox/img/product-list/pro4.jpg') }}">Chap7 reseau</a>#}
+                                    {#</figcaption>#}
+                                {#</figure>#}
+                            {#</li>#}
+                            {#{% endfor %}#}
+                        {#</ul>#}
+
+                    {#</div>#}
 
                 <!-- page end-->
             </section>

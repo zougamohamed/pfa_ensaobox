@@ -15,24 +15,23 @@ class UploadController extends Controller
         $userType= $this->getUser()->getRoles()[0];
         $request->getSession()->set('utilisateur',$userType);
         $matieresDeChaqueProf=array();
+
         $matiereEnregistreByNamex = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:Matieres")->findBy(array('professeur' => $this->getUser()->getUsername()));
         foreach($matiereEnregistreByNamex as $x)
         {
             $matieresDeChaqueProf[]= $x->getNomMatiere();
-            var_dump($matieresDeChaqueProf);
-            echo '<br>';
         }
-//        var_dump($matiereEnregistreByNamex->getNomMatiere());
+        $matieresDeChaqueProf[]='NOUVELLE MATIERE';
         $error="";
         $userNameSession=$this->getUser()->getUsername();
         $newMatiere=new Matieres();
         $documentTeleccharger=new Document();
-//        $form=$this->createForm(new DocumentType(),$documentTeleccharger);
         //----------------------------------------------------------------------
         $form = $this->createFormBuilder($documentTeleccharger)
             ->add('filieres','entity',array('class'=>'PFA\EnsaoboxBundle\Entity\Filieres','property'=>'nomFiliere','multiple'  => false,'attr' => array('class' => 'form-control','style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
             ->add('classes','entity',array('class'=>'PFA\EnsaoboxBundle\Entity\Classes','property'=>'nomClasse','attr' => array('class' => 'form-control','style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
             ->add('matieres','entity',array('class'=>'PFA\EnsaoboxBundle\Entity\Matieres','property'=>'nomMatiere','attr' => array('class' => 'form-control','style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
+//            ->add('matieres', 'choice', array( 'choices' => $matieresDeChaqueProf, 'attr' => array('class' => 'form-control', 'style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ') ))
             ->add('name','text',array('label'=>'Nouvelle matiére','required'    => false,'attr' => array('class' => 'form-control' ,'style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
             ->add('file','file',array('required' => true,'attr'     =>   array('style' => 'font-size:17px;')))
             ->add('envoyer','submit',array('attr' => array('class' => 'btn btn-shadow btn-success','style' => 'font-size:17px ')))
@@ -49,7 +48,6 @@ class UploadController extends Controller
                     if($form['name']->getData()!=null)
                     {
                         $matiereEnregistreByName = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:Matieres")->findOneBy(array('nomMatiere' => $form['name']->getData()));
-//                        var_dump($matiereEnregistreByName);
                         if($matiereEnregistreByName==null) {
                             $newMatiere->setNomMatiere($form['name']->getData());
                             $newMatiere->setProfesseur($userNameSession);

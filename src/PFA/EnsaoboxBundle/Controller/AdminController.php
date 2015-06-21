@@ -21,6 +21,8 @@ class AdminController extends Controller
 {
     public function createUsersAction(Request $request, $f, $n, $u)
     {
+        $userType= $this->getUser()->getRoles()[0];
+        $request->getSession()->set('utilisateur',$userType);
         $filieres = array
         (
             '1'     => 'GI',
@@ -34,6 +36,7 @@ class AdminController extends Controller
 
         $niveaux = array
         (
+
             '1' => '1ère année',
             '2' => '2ème année',
             '3' => '3ème année'

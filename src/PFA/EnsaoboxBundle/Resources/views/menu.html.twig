@@ -11,6 +11,20 @@
                           <span>Index</span>
                       </a>
                   </li>
+                  {#{% elseif app.request.session.get('utilisateur')=='ROLE_PROFESSOR' %}#}
+                  {#<li>#}
+                      {#<a class="active"  href="{{ path('fos_user_profile_show') }}">#}
+                          {#<i class="fa fa-dashboard"></i>#}
+                          {#<span>Index</span>#}
+                      {#</a>#}
+                  {#</li>#}
+                  {% elseif app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
+                      <li class="sub-menu">
+                          <a href="{{ path('pfa_ensaobox_homepage') }}" >
+                              <i class="fa fa-dashboard"></i>
+                              <span>Index</span>
+                          </a>
+                      </li>
                   {% else %}
                   <li>
                       <a class="active"  href="{{ path('pfa_ensaobox_homepage') }}">
@@ -44,7 +58,7 @@
                   <li class="sub-menu">
                       <a href="#" >
                           <i class="fa fa-book"></i>
-                          <span>{{ app.request.session.get('utilisateur') }}</span>
+                          <span>Offre de stage</span>
                       </a>
                   </li>
                   <li class="sub-menu">
