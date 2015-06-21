@@ -1,53 +1,25 @@
-{# src/ENSAO/EnsaoboxBundle/Resources/views/showFiles/index.html.twig #}
-
-{% extends "PFAEnsaoboxBundle::layout.html.twig" %}
-
-{% block title %}{{ parent() }} - Index{% endblock %}
-
-
-		{% block pfa_ensaoboxHeader %}
-            {{ parent() }}
-        {% endblock %}
-    {% block pfa_ensaoboxMenu %}
-        {{ parent() }}
-    {% endblock %}
-  	{% block pfa_ensaoboxContainer %}
-        <!--main content start-->
-        <section id="main-content">
-            <section class="wrapper">
-                <!-- page start-->
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="row product-list">
-                            {% for user in liste %}
-                                <div class="col-md-3">
-                                    <section class="panel">
-                                        <div class="pro-img-box" style="width: 186px; height: 200px;background-image: url({{ asset( 'uploads/user/profilepics/non_trouve.jpg') }})">
-                                        <img alt=""
-                                             src="{{ asset( 'uploads/'~user.getWebProfilePicturePath() ) }}"
-                                             width="250" height="200">
-
-                                        </div>
-                                        <div class="panel-body text-center" style="height: 90px;">
-                                            <h4>
-                                                {{ user.nom }} {{ user.prenom }}
-                                            </h4>
-                                        </div>
-                                    </section>
-                                </div>
-                            {% endfor %}
-
-                        </div>
-                        <!-- page end-->
-                        <button type="button" class="btn btn-shadow btn-danger"
-                                onclick="location.href='{{ render(controller('PFAEnsaoboxBundle:ListeEtudiantsPdf:indexAction')) }}'">Génerer PDF
-                        </button>
+<!--main content start-->
+<!-- page start-->
+<table>
+            {% for user in liste %}
+                {#<tr>#}
+                <div class>
+                    <div class style="width: 160px; height: 160px">
+                        {% if user.getProfilePicturePath()=='' %}
+                        <img alt="" src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('uploads/user/profilepics/non_trouve.jpg') }}"
+                             width="160" height="160">
+                        {% else %}
+                        <img alt="" src="{{ user.getProfilePictureAbsolutePath() }}"
+                             width="160" height="160">
+                        {% endif %}
+                    </div>
+                    <div class style="height: 50px; width: 160px">
+                        <br>
+                        <b style="align-content: center">
+                            {{ user.nom }} {{ user.prenom }}
+                        </b>
                     </div>
                 </div>
-            </section>
-        </section>
-    {% endblock %}
-    {% block pfa_ensaoboxFooter %}
-
-    {% endblock %}
-        
+                    {#</tr>#}
+            {% endfor %}
+</table>
