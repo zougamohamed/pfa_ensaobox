@@ -510,7 +510,7 @@ class User extends BaseUser
     protected function getUploadRootDir($type='profilePicture') {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../../web/'.$this->getUploadDir($type);
+        return __DIR__.'/../../../../web/'.$this->getUploadDir($type);
     }
 
     /**

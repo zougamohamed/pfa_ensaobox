@@ -15,18 +15,18 @@ class ListeEtudiantsController extends Controller
     {
         $filieres = array
         (
-            'GI' => 'GI',
-            'GTR' => 'GTR',
-            'GINDUS' => 'GINDUS',
-            'GC' => 'GC',
-            'GE' => 'GE',
-            'GEII' => 'GEII',
-            'STPI' => 'STPI'
+            '1' => 'GI',
+            '2' => 'GTR',
+            '3' => 'GEII',
+            '4' => 'GE',
+            '5' => 'GINDUS',
+            '6' => 'GC',
+            '7' => 'STPI'
         );
 
         $niveaux = array
         (
-            '1' => '1er année',
+            '1' => '1ère année',
             '2' => '2ème année',
             '3' => '3ème année'
         );
@@ -41,34 +41,40 @@ class ListeEtudiantsController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $listeEtudiants = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User")->findBy(array('filiere' => $form['filiere']->getData(),
-                    'niveau' => $form['niveau']->getData()));
-//                var_dump($form['filiere']->getData());
-/*
-                return $this->render('PFAEnsaoboxBundle:admin:liste.html.twig', array(
-                    'form' => $form->createView(), "liste" => $listeEtudiants
-                ));*/
+                /*$listeEtudiants = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User")->findBy(array('filiere_id' => $form['filiere']->getData(),
+                    'niveau' => $form['niveau']->getData()));*/
+
+                $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                $query = $repository->createQueryBuilder('x')
+                    ->where('x.filieres = :filiere')
+                    ->setParameter('filiere',$form['filiere']->getData())
+                    ->andWhere('x.classes = :classe')
+                    ->setParameter('classe', $form['niveau']->getData())
+                    ->getQuery();
+                $listeEtudiants = $query->getResult();
+//
 
 
                 $html = $this->container->get('templating')->render('PFAEnsaoboxBundle:admin:liste.html.twig', array(
                      "liste" => $listeEtudiants
                 ));
 
+
                 $html2pdf = new \Html2Pdf_Html2Pdf('P','A4','fr');
                 $html2pdf->pdf->SetAuthor('EnsaoBox');
-                $html2pdf->pdf->SetTitle('Liste Etudiants '.$form['filiere']->getData().'niveau'.$form['niveau']->getData());
+//                $html2pdf->pdf->SetTitle('Liste Etudiants '.$form['filiere']->getName().'niveau'.$form['niveau']->getName());
                 $html2pdf->pdf->SetSubject('Liste etudiants avec photos');
                 $html2pdf->pdf->SetDisplayMode('real');
                 $html2pdf->writeHTML($html);
-                $html2pdf->Output('Liste_Etudiants_'.$form['filiere']->getData().'_Niveau_'.$form['niveau']->getData().'.pdf');
+                $html2pdf->Output("liste_etudiants.pdf");
+//                $html2pdf->Output('Liste_Etudiants_'.$form['filiere']->getName().'_Niveau_'.$form['niveau']->getName().'.pdf');
+
+
+                return $html2pdf;
 
 //                $response = new Response();
 //                $response->headers->set('Content-type' , 'application/pdf');
-//
 //                return $response;
-                return $html2pdf;
-
-
 
             }
 
