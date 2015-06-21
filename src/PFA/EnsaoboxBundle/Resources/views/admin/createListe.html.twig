@@ -23,7 +23,7 @@
                     <div class="col-lg-6 col-md-6">
                         <section class="panel">
                             <header class="panel-heading">
-                                Génération des comptes des étudiants.
+                                Affichage liste d'étudiants avec photos de profil
                             </header>
                             <div class="panel-body">
 
@@ -44,7 +44,7 @@
 
 
                                     <div class="form-group col-lg-2 col-md-2 col-xs-2 col-sm-2">
-                                        {{ form_widget(form.submit) }}
+                                        {{ form_widget(form.submit,{ 'label': 'Afficher la liste' }) }}
                                     </div>
                                 {{ form_end(form) }}
                             </div>

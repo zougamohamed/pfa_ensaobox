@@ -1,15 +1,15 @@
 <?php
 
-namespace testPdf\testPdfBundle\Controller;
+namespace PFA\EnsaoboxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ListeEtudiantsPdfController extends Controller
-{
-    public function indexAction($name)
+class ListeEtudiantsPdfController extends Controller {
+
+    public function indexAction()
     {
         //on stocke la vue à convertir en PDF, en n'oubliant pas les paramètres twig si la vue comporte des données dynamiques
-        $html = $this->renderView('EnsaoboxBundle:listeEtudiants:index.html.twig', array('name' => $name));
+        $html = $this->renderView('EnsaoboxBundle:admin:liste.html.twig');
 
         //on instancie la classe Html2Pdf_Html2Pdf en lui passant en paramètre
         //le sens de la page "portrait" => p ou "paysage" => l
@@ -27,9 +27,10 @@ class ListeEtudiantsPdfController extends Controller
         $html2pdf->writeHTML($html);
 
         //Output envoit le document PDF au navigateur internet avec un nom spécifique qui aura un rapport avec le contenu à convertir (exemple : Facture, Règlement…)
-        $html2pdf->Output('Facture.pdf');
+        $html2pdf->Output('liste.pdf');
 
 
         return new Response();
     }
+
 }

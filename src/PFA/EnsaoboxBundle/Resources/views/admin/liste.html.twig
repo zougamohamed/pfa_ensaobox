@@ -22,17 +22,15 @@
                             {% for user in liste %}
                                 <div class="col-md-3">
                                     <section class="panel">
-                                        <div class="pro-img-box">
-                                                <a href="#">
-                                                     <img alt=""  src="{{asset( 'uploads/'~user.getWebProfilePicturePath() )}}">
-                                                </a>
-                                        </div>
+                                        <div class="pro-img-box" style="width: 186px; height: 200px;background-image: url({{ asset( 'uploads/user/profilepics/non_trouve.jpg') }})">
+                                        <img alt=""
+                                             src="{{ asset( 'uploads/'~user.getWebProfilePicturePath() ) }}"
+                                             width="250" height="200">
 
-                                        <div class="panel-body text-center">
+                                        </div>
+                                        <div class="panel-body text-center" style="height: 90px;">
                                             <h4>
-                                                <a href="#" class="pro-title" style="font-size: 10px;">
-                                                    {{ user.nom }} {{ user.prenom }}
-                                                </a>
+                                                {{ user.nom }} {{ user.prenom }}
                                             </h4>
                                         </div>
                                     </section>
@@ -42,7 +40,7 @@
                         </div>
                         <!-- page end-->
                         <button type="button" class="btn btn-shadow btn-danger"
-                                onclick="location.href='{{ path("fos_user_change_password") }}'">Génerer PDF
+                                onclick="location.href='{{ render(controller('PFAEnsaoboxBundle:ListeEtudiantsPdf:indexAction')) }}'">Génerer PDF
                         </button>
                     </div>
                 </div>
