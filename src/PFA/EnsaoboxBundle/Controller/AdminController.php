@@ -35,9 +35,9 @@ class AdminController extends Controller
 
         $niveaux = array
         (
-            '1' => '1er année',
-            '2' => '2ème année',
-            '3' => '3ème année'
+            '1' => '1er annee',
+            '2' => '2eme annee',
+            '3' => '3eme annee'
         );
 
         $form_create = $this->get('form.factory')->createNamedBuilder('create','form')
@@ -69,7 +69,9 @@ class AdminController extends Controller
                 if ($form_create->isValid())
                 {
                     $factory = $this->get('security.encoder_factory');
-                    $user = new User();
+                    $userManager = $this->get('fos_user.user_manager');
+
+                    $user = $userManager->createUser();
 
                     $encoder = $factory->getEncoder($user);
 
@@ -215,6 +217,7 @@ class AdminController extends Controller
                                 $user->setRoles(array('ROLE_ETUDIANT'));
                                 $user->setNiveau($niveau);
                                 $user->setFiliere($filiere);
+                                $user->setEnabled(true);
 
                                 $users[$j] = $user;
                                 $j++;
@@ -226,13 +229,14 @@ class AdminController extends Controller
 
                             //Insertion des étudiants en base de donnée.
                             //--------------------------------------
-//                            $em = $this->getDoctrine()->getManager();
-//
-//                            for ($i = 0; $i < count($users); $i++)
-//                            {
-//                                $em->persist($users[$i]);
-//                            }
-//                            $em->flush();
+                            //$em = $this->getDoctrine()->getManager();
+
+
+                            for ($i = 0; $i < count($users); $i++)
+                            {
+                                $userManager->updateUser($users[$i],true);
+                            }
+                            //$em->flush();
                             //--------------------------------------
 
 
