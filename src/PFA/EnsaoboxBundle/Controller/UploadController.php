@@ -2,6 +2,7 @@
 namespace PFA\EnsaoboxBundle\Controller;
 use PFA\EnsaoboxBundle\Entity\Matieres;
 use PFA\EnsaoboxBundle\Form\DocumentType;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use PFA\EnsaoboxBundle\Entity\Document;
 use Symfony\Component\HttpFoundation\Request;
@@ -104,6 +105,33 @@ class UploadController extends Controller
                                 $em = $this->getDoctrine()->getManager();
                                 $em->persist($documentTeleccharger);
                                 $em->flush();
+
+                                //Partie Envoi des emails : ************************************************************
+
+                                $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                                $query = $repository->createQueryBuilder('x')
+                                    ->where('x.filieres = :filiere')
+                                    ->setParameter('filiere',$form['filieres']->getData())
+                                    ->andWhere('x.classes = :classe')
+                                    ->setParameter('classe', $form['classes']->getData())
+                                    ->getQuery();
+                                $listeEtudiants = $query->getResult();
+
+                                $message= Swift_Message::newInstance()
+                                    ->setSubject('EnsaoBox : Nouveau Cour ajoute(e) par '.$this->getUser()->getUsername().' ('. $form['matieres']->getData()->getNomMatiere().')')
+                                    ->setFrom('ensaobox@gmail.com')
+                                    ->setTo('zougamohamed@gmail.com')
+                                    ->setCharset('utf-8')
+                                    ->setContentType('text/html')
+                                    ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+
+                                foreach($listeEtudiants as $user) {
+                                    $message->addTo($user->getEmailCanonical());
+                                }
+
+                                $this->get('mailer')->send($message);
+
+                                // Fin partie Envois des Emails ***********************************************************
                             }
                             elseif($form['name']->getData()!=null &&($form['matieres']->getData()!=null || $form['matieres']->getData()==null ))
                             {
@@ -114,6 +142,33 @@ class UploadController extends Controller
                                 $em = $this->getDoctrine()->getManager();
                                 $em->persist($documentTeleccharger);
                                 $em->flush();
+
+                                //Partie Envoi des emails : ************************************************************
+
+                                $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                                $query = $repository->createQueryBuilder('x')
+                                    ->where('x.filieres = :filiere')
+                                    ->setParameter('filiere',$form['filieres']->getData())
+                                    ->andWhere('x.classes = :classe')
+                                    ->setParameter('classe', $form['classes']->getData())
+                                    ->getQuery();
+                                $listeEtudiants = $query->getResult();
+
+                                $message= Swift_Message::newInstance()
+                                    ->setSubject('EnsaoBox : Nouveau Cour ajoute(e) par '.$this->getUser()->getUsername().' ('. $form['name']->getData().')')
+                                    ->setFrom('ensaobox@gmail.com')
+                                    ->setTo('zougamohamed@gmail.com')
+                                    ->setCharset('utf-8')
+                                    ->setContentType('text/html')
+                                    ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+
+                                foreach($listeEtudiants as $user) {
+                                    $message->addTo($user->getEmailCanonical());
+                                }
+
+                                $this->get('mailer')->send($message);
+
+                                // Fin partie Envois des Emails ***********************************************************
                             }
 //                            else
 //                            {
@@ -138,6 +193,33 @@ class UploadController extends Controller
                             $em = $this->getDoctrine()->getManager();
                             $em->persist($documentTeleccharger);
                             $em->flush();
+
+                            //Partie Envoi des emails : ************************************************************
+
+                            $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                            $query = $repository->createQueryBuilder('x')
+                                ->where('x.filieres = :filiere')
+                                ->setParameter('filiere',$form['filieres']->getData())
+                                ->andWhere('x.classes = :classe')
+                                ->setParameter('classe', $form['classes']->getData())
+                                ->getQuery();
+                            $listeEtudiants = $query->getResult();
+
+                            $message= Swift_Message::newInstance()
+                                ->setSubject('EnsaoBox : Nouveau Cour ajoute(e) par '.$this->getUser()->getUsername().' ('. $form['matieres']->getData()->getNomMatiere().')')
+                                ->setFrom('ensaobox@gmail.com')
+                                ->setTo('zougamohamed@gmail.com')
+                                ->setCharset('utf-8')
+                                ->setContentType('text/html')
+                                ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+
+                            foreach($listeEtudiants as $user) {
+                                $message->addTo($user->getEmailCanonical());
+                            }
+
+                            $this->get('mailer')->send($message);
+
+                            // Fin partie Envois des Emails ***********************************************************
                         }
                         elseif($form['name']->getData()!=null && ($form['matieres']->getData()!=null || $form['matieres']->getData()==null ))
                         {
@@ -148,6 +230,33 @@ class UploadController extends Controller
                             $em = $this->getDoctrine()->getManager();
                             $em->persist($documentTeleccharger);
                             $em->flush();
+
+                            //Partie Envoi des emails : ************************************************************
+
+                            $repository = $this->getDoctrine()->getRepository("PFAEnsaoboxBundle:User");
+                            $query = $repository->createQueryBuilder('x')
+                                ->where('x.filieres = :filiere')
+                                ->setParameter('filiere',$form['filieres']->getData())
+                                ->andWhere('x.classes = :classe')
+                                ->setParameter('classe', $form['classes']->getData())
+                                ->getQuery();
+                            $listeEtudiants = $query->getResult();
+
+                            $message= Swift_Message::newInstance()
+                                ->setSubject('EnsaoBox : Nouveau Cour ajoute(e) par '.$this->getUser()->getUsername().' ('. $form['name']->getData().')')
+                                ->setFrom('ensaobox@gmail.com')
+                                ->setTo('zougamohamed@gmail.com')
+                                ->setCharset('utf-8')
+                                ->setContentType('text/html')
+                                ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+
+                            foreach($listeEtudiants as $user) {
+                                $message->addTo($user->getEmailCanonical());
+                            }
+
+                            $this->get('mailer')->send($message);
+
+                            // Fin partie Envois des Emails ***********************************************************
                         }
 //                        else
 //                        {

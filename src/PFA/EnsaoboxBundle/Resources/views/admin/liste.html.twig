@@ -3,7 +3,7 @@
 {#<table>#}
             {% for user in liste %}
                 {#<tr>#}
-                <div class>
+                <div class style="display : inline-block;">
                     <div class style="width: 160px; height: 160px;">
                         {% if user.getProfilePicturePath()=='' %}
                         <img alt="" src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('uploads/user/profilepics/non_trouve.jpg') }}"
@@ -13,7 +13,7 @@
                              width="160" height="160">
                         {% endif %}
                     </div>
-                    <div class style="height: 50px; width: 160px">
+                    <div class style="height: 50px; width: 160px;display : inline-block;">
                         <br>
                         <b style="align-content: center">
                             {{ user.nom }} {{ user.prenom }}
