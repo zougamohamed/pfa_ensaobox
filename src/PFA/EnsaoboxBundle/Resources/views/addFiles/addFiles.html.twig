@@ -28,7 +28,7 @@
         {#</style>#}
         <section id="main-content">
           <section class="wrapper">
-              <h1 class="text-center">Dépôt de votre fichiers</h1>
+              <h1 class="text-center">Dépôt des fichiers</h1>
               {% if error!='' %}
                     <div class="text-center"><h2 class="alert-danger">{{ error }}</h2></div>
               {% else %}
@@ -108,12 +108,13 @@
                               <td>{{ d.matieres.nomMatiere }}</td>
                               <td><a href="{{ asset('uploads/documents/'~d.filieres.nomFiliere~'/'~d.classes.nomClasse~'/'~userNameSession~'/'~d.matieres.nomMatiere~'/'~d.path) }}">{{ d.path }}</a></td>
                               <td>
-                                  <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                                   {#<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>#}
-                                  <form id="recherche_form" role="form" action="{{ path('pfa_ensaobox_recherche') }}" method="post">`
+                                  <form id="recherche_form" role="form" action="{{ path('pfa_ensaobox_supprimer_files') }}" method="post">
+                                      <span class="btn btn-success btn-xs"><i class="fa fa-check"></i></span>
+                                      <input type="text" name="id" hidden="hidden" value={{ d.id}}>
                                       <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
                                   </form>
-                                  <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                  {#<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>#}
                               </td>
                           </tr>
                           {% endfor %}

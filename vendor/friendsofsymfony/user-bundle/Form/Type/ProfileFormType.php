@@ -68,7 +68,7 @@ class ProfileFormType extends AbstractType
             ->add('nom')
             ->add('prenom');
         $builder->add('dateNaissance','date', array(
-            'years' => range(date('Y') -30, date('Y')-15),
+            'years' => range(date('Y') -60, date('Y')-15),
         ));
         $builder->add('lienLinkedin','text', array('required' => false));
         $builder->add('lienFacebook','text', array('required' => false));

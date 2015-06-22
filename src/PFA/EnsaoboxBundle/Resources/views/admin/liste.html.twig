@@ -1,8 +1,12 @@
 <!--main content start-->
 <!-- page start-->
 {#<table>#}
-            {% for user in liste %}
-                {#<tr>#}
+    {#{% set i = 0 %}#}
+
+    {#{% for user in liste %}#}
+        {#<tr>#}
+        {#{% for i in 0..4 %}#}
+        {#<td>#}
                 <div class style="display : inline-block;">
                     <div class style="width: 160px; height: 160px;">
                         {% if user.getProfilePicturePath()=='' %}
@@ -20,6 +24,8 @@
                         </b>
                     </div>
                 </div>
-                    {#</tr>#}
-            {% endfor %}
+        {#</td>#}
+        {#{% endfor %}#}
+    {#</tr>#}
+    {#{% endfor %}#}
 {#</table>#}

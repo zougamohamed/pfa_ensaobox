@@ -11,20 +11,13 @@
                           <span>Index</span>
                       </a>
                   </li>
-                  {#{% elseif app.request.session.get('utilisateur')=='ROLE_PROFESSOR' %}#}
-                  {#<li>#}
-                      {#<a class="active"  href="{{ path('fos_user_profile_show') }}">#}
-                          {#<i class="fa fa-dashboard"></i>#}
-                          {#<span>Index</span>#}
-                      {#</a>#}
-                  {#</li>#}
-                  {% elseif app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
-                      <li class="sub-menu">
-                          <a href="{{ path('pfa_ensaobox_homepage') }}" >
-                              <i class="fa fa-dashboard"></i>
-                              <span>Index</span>
-                          </a>
-                      </li>
+                  {% elseif app.request.session.get('utilisateur')=='ROLE_PROFESSOR' %}
+                  <li>
+                      <a class="active"  href="{{ path('pfa_ensaobox_ajouter_files') }}">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Index</span>
+                      </a>
+                  </li>
                   {% else %}
                   <li>
                       <a class="active"  href="{{ path('pfa_ensaobox_homepage') }}">
@@ -32,7 +25,6 @@
                           <span>Index</span>
                       </a>
                   </li>
-
                   {% endif %}
                   <li>
                       <a  href="{{ path('fos_user_profile_show') }}">
@@ -40,14 +32,15 @@
                           <span>Profile</span>
                       </a>
                   </li>
-                  {% if app.request.session.get('utilisateur')=='ROLE_PROFESSOR' %}
+                  {% if app.request.session.get('utilisateur')=='ROLE_ADMIN' %}
                   <li class="sub-menu">
-                      <a href="{{ path('pfa_ensaobox_ajouter_files') }}" >
+                      <a href="{{ path('pfa_ensaobox_admin_liste') }}" >
                           <i class="fa fa-book"></i>
-                          <span>Mes cours</span>
+                          <span>Liste étudiants</span>
                       </a>
                   </li>
-                  {% elseif app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
+                  {% endif %}
+                  {% if app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
                   <li class="sub-menu">
                       <a href="{{ path('pfa_ensaobox_afficher_files') }}" >
                           <i class="fa fa-book"></i>
