@@ -1,26 +1,36 @@
 pfa_ensaobox_homepage:
     path:     /
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:index }
+    
+pfa_ensaobox_supprimer_files:
+    path:    /prof/documents/
+    defaults: { _controller: PFAEnsaoboxBundle:Upload:supprimer}
 
 pfa_ensaobox_ajouter_files:
     path:    /prof/documents/addFiles
     defaults: { _controller: PFAEnsaoboxBundle:Upload:ajouter}
 
+pfa_ensaobox_recherche:
+    path:     /documents/
+    defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:rechercherDoc}
+
 pfa_ensaobox_afficher_files:
     path:    /documents/showFiles
     defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:afficher}
 
-pfa_ensaobox_admin:
-    path:     /admin
-    defaults: { _controller: PFAEnsaoboxBundle:Admin:createUsers }
-
 pfa_ensaobox_filter:
     path:     /documents/{nomMatiere}
     defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:filtrer, nomMatiere: rien }
-pfa_ensaobox_recherche:
-    path:     /documents/
-    defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:rechercherDoc}
+
 pfa_ensaobox_admin_liste:
     path:     /admin/createListe
     defaults: { _controller: PFAEnsaoboxBundle:ListeEtudiants:createListe }
+
+pfa_ensaobox_admin_liste:
+    path:     /admin/createListe
+    defaults: { _controller: PFAEnsaoboxBundle:ListeEtudiants:createListe }
+
+pfa_ensaobox_admin:
+    path:     /admin/{f}/{n}/{u}
+    defaults: { _controller: PFAEnsaoboxBundle:Admin:createUsers, f : '' , n : '' , u : '' }
 
