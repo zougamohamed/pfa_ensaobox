@@ -52,15 +52,21 @@
                                   {{ form_widget(form.classes) }}
                                   {{ form_errors(form.classes) }}
                               </div>
-                              <div class="form-group">
+                              <div class="form-group" id="matiere">
                                   {{ form_label(form.matieres) }}
+                                  <span id="addd" class="btn btn-success btn-xs"><i class="fa fa-plus-circle "></i></span>
                                   {{ form_widget(form.matieres) }}
                                   {{ form_errors(form.matieres) }}
+
+
                               </div>
-                              <div class="form-group">
+
+                              <div class="form-group" id="new" style="display : none">
                                   {{ form_label(form.name) }}
+                                  <span id="hide" class="btn btn-success btn-xs" style="display: none"><i class="fa fa-minus-circle "></i></span>
                                   {{ form_widget(form.name) }}
                                   {{ form_errors(form.name) }}
+
                               </div>
                               <div class="form-group col-lg-8 col-md-8 col-xs-8 col-sm-8 fileUpload btn btn-primary">
                                   {{ form_widget(form.file) }}

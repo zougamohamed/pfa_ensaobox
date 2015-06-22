@@ -10,6 +10,10 @@ pfa_ensaobox_afficher_files:
     path:    /documents/showFiles
     defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:afficher}
 
+pfa_ensaobox_admin_liste:
+    path:     /admin/createListe
+    defaults: { _controller: PFAEnsaoboxBundle:ListeEtudiants:createListe }
+
 pfa_ensaobox_admin:
     path:     /admin/{f}/{n}/{u}
     defaults: { _controller: PFAEnsaoboxBundle:Admin:createUsers, f : '' , n : '' , u : '' }
@@ -20,7 +24,5 @@ pfa_ensaobox_filter:
 pfa_ensaobox_recherche:
     path:     /documents/
     defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:rechercherDoc}
-pfa_ensaobox_admin_liste:
-    path:     /admin/createListe
-    defaults: { _controller: PFAEnsaoboxBundle:ListeEtudiants:createListe }
+
 
