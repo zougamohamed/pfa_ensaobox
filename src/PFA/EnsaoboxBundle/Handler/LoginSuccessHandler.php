@@ -33,7 +33,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 
         elseif ($this->security->isGranted('ROLE_ETUDIANT'))
         {
-            $response = new RedirectResponse($this->router->generate('fos_user_profile_show'));
+            $response = new RedirectResponse($this->router->generate('pfa_ensaobox_homepage'));
         }
 
         return $response;
