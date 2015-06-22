@@ -29,7 +29,11 @@
         <section id="main-content">
           <section class="wrapper">
               <h1 class="text-center">Dépôt de votre fichiers</h1>
-              <div class="text-center"><h2 class="alert-info">{{ error }}</h2></div>
+              {% if error!='' %}
+                    <div class="text-center"><h2 class="alert-danger">{{ error }}</h2></div>
+              {% else %}
+                    <div class="text-center"><h2 class="alert-info">{{ info }}</h2></div>
+              {% endif %}
               <row>
                   <div class="col-lg-4 col-md-4">
                       <section class="panel">
