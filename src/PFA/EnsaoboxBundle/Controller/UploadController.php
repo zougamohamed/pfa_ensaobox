@@ -5,8 +5,12 @@ use PFA\EnsaoboxBundle\Form\DocumentType;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use PFA\EnsaoboxBundle\Entity\Document;
+use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\CssSelector\Parser\Reader;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\Null;
+
 class UploadController extends Controller
 {
     public function ajouterAction(Request $request)
@@ -89,7 +93,7 @@ class UploadController extends Controller
                         if (!empty($documentEnregistreByName))
                         {
                             global $error;
-                            $error = "le fichier existe déja dans votre liste merci de renommer votre fichier ";
+                            $error = "le fichier existe déja dans votre répertoitre !";
                         }
                         else
                         {
@@ -130,6 +134,7 @@ class UploadController extends Controller
                                         'lien'=> $l)));
 
                                 foreach($listeEtudiants as $user) {
+                                    if ($user->getEmailCanonical()!=Null)
                                     $message->addTo($user->getEmailCanonical());
                                 }
 
@@ -171,7 +176,8 @@ class UploadController extends Controller
                                         'lien'=> $l)));
 
                                 foreach($listeEtudiants as $user) {
-                                    $message->addTo($user->getEmailCanonical());
+                                    if ($user->getEmailCanonical()!=Null)
+                                        $message->addTo($user->getEmailCanonical());
                                 }
 
                                 $this->get('mailer')->send($message);
@@ -226,7 +232,8 @@ class UploadController extends Controller
                                     'lien'=> $l)));
 
                             foreach($listeEtudiants as $user) {
-                                $message->addTo($user->getEmailCanonical());
+                                if ($user->getEmailCanonical()!=Null)
+                                    $message->addTo($user->getEmailCanonical());
                             }
 
                             $this->get('mailer')->send($message);
@@ -267,7 +274,8 @@ class UploadController extends Controller
                                     'lien'=> $l)));
 
                             foreach($listeEtudiants as $user) {
-                                $message->addTo($user->getEmailCanonical());
+                                if ($user->getEmailCanonical()!=Null)
+                                    $message->addTo($user->getEmailCanonical());
                             }
 
                             $this->get('mailer')->send($message);
@@ -298,5 +306,17 @@ class UploadController extends Controller
             'info'=>$info,
             'userNameSession'=>$userNameSession
         ));
+    }
+    public function supprimerAction(Request $request)
+    {
+
+       var_dump('ici on va traiter la supprission des fichier selectionner par le professeur');
+       var_dump($request->request->get('id'));
+        $em = $this->getDoctrine()->getManager();
+        $cours = $em->getRepository("PFAEnsaoboxBundle:Document")->find($request->request->get('id'));
+        $em->remove($cours);
+        $em->flush();
+        $url = $this->get('router')->generate('pfa_ensaobox_ajouter_files');
+        return $this->redirect($url);
     }
 }

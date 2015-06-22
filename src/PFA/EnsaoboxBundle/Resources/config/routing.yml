@@ -3,7 +3,7 @@ pfa_ensaobox_homepage:
     defaults: { _controller: PFAEnsaoboxBundle:Dashboard:index }
     
 pfa_ensaobox_supprimer_files:
-    path:    /prof/documents/
+    path:    /prof/documents/supprimerDoc
     defaults: { _controller: PFAEnsaoboxBundle:Upload:supprimer}
 
 pfa_ensaobox_ajouter_files:
@@ -21,10 +21,6 @@ pfa_ensaobox_afficher_files:
 pfa_ensaobox_filter:
     path:     /documents/{nomMatiere}
     defaults: { _controller: PFAEnsaoboxBundle:ShowFiles:filtrer, nomMatiere: rien }
-
-pfa_ensaobox_admin_liste:
-    path:     /admin/createListe
-    defaults: { _controller: PFAEnsaoboxBundle:ListeEtudiants:createListe }
 
 pfa_ensaobox_admin_liste:
     path:     /admin/createListe

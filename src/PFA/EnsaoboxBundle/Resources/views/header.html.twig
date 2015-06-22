@@ -7,7 +7,9 @@
           {% if app.request.session.get('utilisateur')=='ROLE_ETUDIANT' %}
             <a href="{{ path('pfa_ensaobox_homepage') }}" class="logo">ENSAO<span>BOX</span></a>
           {% elseif app.request.session.get('utilisateur')=='ROLE_PROFESSOR' %}
-              <a href="{{ path('fos_user_profile_show') }}" class="logo">ENSAO<span>BOX</span></a>
+              <a href="{{ path('pfa_ensaobox_ajouter_files') }}" class="logo">ENSAO<span>BOX</span></a>
+          {% elseif app.request.session.get('utilisateur')=='ROLE_ADMIN' %}
+              <a href="{{ path('pfa_ensaobox_admin') }}" class="logo">ENSAO<span>BOX</span></a>
           {% endif %}
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
