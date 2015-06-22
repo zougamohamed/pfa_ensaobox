@@ -76,9 +76,14 @@
                   </div>
                   <div class="col-lg-8 col-md-8">
                         <section class="panel">
-                        <header class="panel-heading">
-                          <h4 class="text-center"><b>Les Documents partagés avec les étudiants</b></h4>
-                      </header>
+                            <header class="panel-heading">
+                                <h4 class="col-md-10"><b>Les Documents partagés avec les étudiants</b></h4>
+                                <ul class="pagination pagination-sm pro-page-list ">
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">»</a></li>
+                                </ul>
+                            </header>
                         <table class="table table-striped table-advance table-hover">
                           <thead>
                           <tr>
@@ -99,6 +104,9 @@
                               <td>
                                   <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                                   {#<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>#}
+                                  <form id="recherche_form" role="form" action="{{ path('pfa_ensaobox_recherche') }}" method="post">`
+                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                  </form>
                                   <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
                               </td>
                           </tr>

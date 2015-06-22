@@ -28,7 +28,7 @@ class UploadController extends Controller
         //----------------------------------------------------------------------
         $form = $this->createFormBuilder($documentTeleccharger)
             ->add('filieres','entity',array('class'=>'PFA\EnsaoboxBundle\Entity\Filieres','property'=>'nomFiliere','multiple'  => false,'attr' => array('class' => 'form-control','style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
-            ->add('classes','entity',array('class'=>'PFA\EnsaoboxBundle\Entity\Classes','property'=>'nomClasse','attr' => array('class' => 'form-control','style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
+            ->add('classes','entity',array('class'=>'PFA\EnsaoboxBundle\Entity\Classes','property'=>'nomClasse','label' => 'Niveau','attr' => array('class' => 'form-control','style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
 //            ->add('matieres','entity',array('class'=>'PFA\EnsaoboxBundle\Entity\Matieres','property'=>'nomMatiere','attr' => array('class' => 'form-control','style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ')))
 //            ->add('matieres', 'choice', array( 'choices' => $matieresDeChaqueProf, 'attr' => array('class' => 'form-control', 'style' => 'background-color:rgb(250, 255, 189);color:black;font-size:15px;  ') ))
             ->add('matieres','entity', array(
@@ -62,14 +62,14 @@ class UploadController extends Controller
                             $em->flush();
                             $documentTeleccharger->setMatieres($newMatiere);
                         }
-                        else
-                        {
-                            global $error;
-                            $error='la matière existe déja . choisissez la matière à partir de la liste ';
-                            global $stop;
-                            $stop=true;
-
-                        }
+//                        else
+//                        {
+//                            global $error;
+//                            $error='la matière existe déja . choisissez la matière à partir de la liste ';
+//                            global $stop;
+//                            $stop=true;
+//
+//                        }
                     }
                     if($form['matieres']->getData()!=null)
                     {
@@ -88,14 +88,14 @@ class UploadController extends Controller
                         if (!empty($documentEnregistreByName))
                         {
                             global $error;
-                            $error = "le fichier existe deja dans votre liste merci de renomer votre fichier ";
+                            $error = "le fichier existe déja dans votre liste merci de renommer votre fichier ";
                         }
                         else
                         {
-                            global $info;
-                            $info = "le fichier est bien téléchargé";
                             if($form['name']->getData()==null  && $form['matieres']->getData()!=null)
                             {
+                                global $info;
+                                $info = "le fichier est bien téléchargé";
                                 $documentTeleccharger->name='empty';
                                 $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse() . '/' .$this->getUser()->getUsername().'/'. $form['matieres']->getData()->getNomMatiere());
                                 global $error;
@@ -107,51 +107,53 @@ class UploadController extends Controller
                             }
                             elseif($form['name']->getData()!=null &&($form['matieres']->getData()!=null || $form['matieres']->getData()==null ))
                             {
+                                global $info;
+                                $info = "le fichier est bien téléchargé";
                                 $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse(). '/' .$this->getUser()->getUsername() . '/' . $form['name']->getData());
-                                global $error;
                                 $documentTeleccharger->setProfesseur($userNameSession);
                                 $em = $this->getDoctrine()->getManager();
                                 $em->persist($documentTeleccharger);
                                 $em->flush();
                             }
-                            else
-                            {
-                                global $error;
-                                $error='vous devez choisir votre matière si il n\'existe dans la liste vous devez l\'insérer ';
-                            }
+//                            else
+//                            {
+//                                global $error;
+//                                $error='vous devez choisir votre matière si il n\'existe dans la liste vous devez l\'insérer ';
+//                            }
                             $this->redirect($this->generateUrl('pfa_ensaobox_ajouter_files'));
 
                         }
                     }
                     else
                     {
-                        global $info;
-                        $info = "le fichier est bien téléchargé";
+
                         if($form['name']->getData()==null  && $form['matieres']->getData()!=null)
                         {
+                            global $info;
+                            $info = "le fichier est bien téléchargé";
                             $documentTeleccharger->name='empty';
                             $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse() . '/' .$this->getUser()->getUsername().'/'. $form['matieres']->getData()->getNomMatiere());
-                            global $error;
                             $documentTeleccharger->setProfesseur($userNameSession);
                             //................................................
                             $em = $this->getDoctrine()->getManager();
                             $em->persist($documentTeleccharger);
                             $em->flush();
                         }
-                        elseif($form['name']->getData()!=null &&($form['matieres']->getData()!=null || $form['matieres']->getData()==null ))
+                        elseif($form['name']->getData()!=null && ($form['matieres']->getData()!=null || $form['matieres']->getData()==null ))
                         {
+                            global $info;
+                            $info = "le fichier est bien téléchargé";
                             $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse(). '/' .$this->getUser()->getUsername() . '/' . $form['name']->getData());
-                            global $error;
                             $documentTeleccharger->setProfesseur($userNameSession);
                             $em = $this->getDoctrine()->getManager();
                             $em->persist($documentTeleccharger);
                             $em->flush();
                         }
-                        else
-                        {
-                            global $error;
-                            $error='vous devez choisir votre matière si il n\'éxiste dans la liste vous devez l\'insérer ';
-                        }
+//                        else
+//                        {
+//                            global $error;
+//                            $error='vous devez choisir votre matière si il n\'éxiste dans la liste vous devez l\'insérer ';
+//                        }
                         $this->redirect($this->generateUrl('pfa_ensaobox_ajouter_files'));
 
                     }
