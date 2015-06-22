@@ -26,6 +26,11 @@ pfa_ensaobox_admin_liste:
     path:     /admin/createListe
     defaults: { _controller: PFAEnsaoboxBundle:ListeEtudiants:createListe }
 
+pfa_ensaobox_admin_liste:
+    path:     /admin/createListe
+    defaults: { _controller: PFAEnsaoboxBundle:ListeEtudiants:createListe }
+
 pfa_ensaobox_admin:
     path:     /admin/{f}/{n}/{u}
     defaults: { _controller: PFAEnsaoboxBundle:Admin:createUsers, f : '' , n : '' , u : '' }
+
