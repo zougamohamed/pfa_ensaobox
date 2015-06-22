@@ -98,6 +98,8 @@ class UploadController extends Controller
                                 global $info;
                                 $info = "le fichier est bien téléchargé";
                                 $documentTeleccharger->name='empty';
+                                $t=$this->getUser()->getUsername().', Matière :'. $form['matieres']->getData()->getNomMatiere();
+                                $l=$form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse() . '/' .$this->getUser()->getUsername().'/'. $form['matieres']->getData()->getNomMatiere().'/'.$form['file']->getData()->getClientOriginalName();
                                 $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse() . '/' .$this->getUser()->getUsername().'/'. $form['matieres']->getData()->getNomMatiere());
                                 global $error;
                                 $documentTeleccharger->setProfesseur($userNameSession);
@@ -123,7 +125,9 @@ class UploadController extends Controller
                                     ->setTo('zougamohamed@gmail.com')
                                     ->setCharset('utf-8')
                                     ->setContentType('text/html')
-                                    ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+                                    ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig',array(
+                                        'text'=> $t,
+                                        'lien'=> $l)));
 
                                 foreach($listeEtudiants as $user) {
                                     $message->addTo($user->getEmailCanonical());
@@ -137,6 +141,8 @@ class UploadController extends Controller
                             {
                                 global $info;
                                 $info = "le fichier est bien téléchargé";
+                                $t=$this->getUser()->getUsername().', Matière :'. $form['name']->getData();
+                                $l=$form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse(). '/' .$this->getUser()->getUsername() . '/' . $form['name']->getData().'/'.$form['file']->getData()->getClientOriginalName();
                                 $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse(). '/' .$this->getUser()->getUsername() . '/' . $form['name']->getData());
                                 $documentTeleccharger->setProfesseur($userNameSession);
                                 $em = $this->getDoctrine()->getManager();
@@ -160,7 +166,9 @@ class UploadController extends Controller
                                     ->setTo('zougamohamed@gmail.com')
                                     ->setCharset('utf-8')
                                     ->setContentType('text/html')
-                                    ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+                                    ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig',array(
+                                        'text'=>$t,
+                                        'lien'=> $l)));
 
                                 foreach($listeEtudiants as $user) {
                                     $message->addTo($user->getEmailCanonical());
@@ -187,6 +195,8 @@ class UploadController extends Controller
                             global $info;
                             $info = "le fichier est bien téléchargé";
                             $documentTeleccharger->name='empty';
+                            $t=$this->getUser()->getUsername().', Matière :'. $form['matieres']->getData()->getNomMatiere();
+                            $l=$form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse() . '/' .$this->getUser()->getUsername().'/'. $form['matieres']->getData()->getNomMatiere().'/'.$form['file']->getData()->getClientOriginalName();
                             $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse() . '/' .$this->getUser()->getUsername().'/'. $form['matieres']->getData()->getNomMatiere());
                             $documentTeleccharger->setProfesseur($userNameSession);
                             //................................................
@@ -211,7 +221,9 @@ class UploadController extends Controller
                                 ->setTo('zougamohamed@gmail.com')
                                 ->setCharset('utf-8')
                                 ->setContentType('text/html')
-                                ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+                                ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig', array(
+                                    'text'=>$t,
+                                    'lien'=> $l)));
 
                             foreach($listeEtudiants as $user) {
                                 $message->addTo($user->getEmailCanonical());
@@ -225,6 +237,8 @@ class UploadController extends Controller
                         {
                             global $info;
                             $info = "le fichier est bien téléchargé";
+                            $t=$this->getUser()->getUsername().', Matière :'. $form['name']->getData();
+                            $l=$form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse(). '/' .$this->getUser()->getUsername() . '/' . $form['name']->getData().'/'.$form['file']->getData()->getClientOriginalName();
                             $documentTeleccharger->upload($form['filieres']->getData()->getNomFiliere() . '/' . $form['classes']->getData()->getNomClasse(). '/' .$this->getUser()->getUsername() . '/' . $form['name']->getData());
                             $documentTeleccharger->setProfesseur($userNameSession);
                             $em = $this->getDoctrine()->getManager();
@@ -248,7 +262,9 @@ class UploadController extends Controller
                                 ->setTo('zougamohamed@gmail.com')
                                 ->setCharset('utf-8')
                                 ->setContentType('text/html')
-                                ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig'));
+                                ->setBody($this->renderView('PFAEnsaoboxBundle:email:email.html.twig',array(
+                                    'text'=>$t,
+                                    'lien'=> $l)));
 
                             foreach($listeEtudiants as $user) {
                                 $message->addTo($user->getEmailCanonical());
